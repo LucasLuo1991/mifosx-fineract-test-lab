@@ -2,10 +2,10 @@ from pathlib import Path
 from typing import Generator
 
 import pytest
+from api.api_client import FineractApiClient
 from dotenv import load_dotenv
 from sqlalchemy import Engine, create_engine
 from sqlalchemy.engine import Connection
-from utils.api_client import FineractApiClient
 from utils.config import FineractTestConfig, load_config_from_env
 from utils.urls import build_postgres_dsn
 
@@ -40,14 +40,16 @@ def db_connection(db_engine: Engine) -> Generator[Connection, None, None]:
 
 
 @pytest.fixture(scope="session")
-def authenticated_api_client(config: FineractTestConfig) -> Generator[FineractApiClient, None, None]:
+def authenticated_api_client(
+    config: FineractTestConfig,
+) -> Generator[FineractApiClient, None, None]:
     client = FineractApiClient(
         api_base_url=config.api_base_url,
         tenant_id=config.tenant_id,
         api_username=config.api_username,
         api_password=config.api_password,
     )
-    client.get_authentication()
+    client.authenticate()
     try:
         yield client
     finally:

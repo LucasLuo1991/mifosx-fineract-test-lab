@@ -56,6 +56,12 @@ Run Python tests from `database-setup/`:
 python -m pytest
 ```
 
+If the default Python environment is missing dependencies, retry with the local virtual environment from `database-setup/`:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest
+```
+
 Install UI test dependencies from `ui-tests/`:
 
 ```powershell
