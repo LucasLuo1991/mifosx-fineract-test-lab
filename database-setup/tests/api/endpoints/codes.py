@@ -22,7 +22,14 @@ class CodesEndpoint(BaseEndpoint):
     def get_code_values(self, code_id: int, expected_status: int = 200) -> list[Any]:
         return self._get(f"/codes/{code_id}/codevalues", expected_status)
 
-    def create_code_values(
-        self, code_id: int, code_values: dict[str, Any], expected_status: int = 200
+    def create_code_values_by_id(
+        self, code_id: int, code_value: dict[str, Any], expected_status: int = 200
     ) -> dict[str, Any]:
-        return self._post(f"/codes/{code_id}/codevalues", code_values, expected_status)
+        return self._post(f"/codes/{code_id}/codevalues", code_value, expected_status)
+
+    def create_code_values_by_name(
+        self, code_name: str, code_value: dict[str, Any], expected_status: int = 200
+    ) -> dict[str, Any]:
+        return self._post(
+            f"/codes/name/{code_name}/codevalues", code_value, expected_status
+        )
