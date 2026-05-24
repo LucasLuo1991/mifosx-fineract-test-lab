@@ -1,3 +1,5 @@
+from typing import Any
+
 from api.base_endpoint import BaseEndpoint
 
 
@@ -9,5 +11,18 @@ class CodesEndpoint(BaseEndpoint):
     it defaults to a code value of 'Passport' but could be 'Drivers License, National Id' etc
     """
 
-    def get_all_codes(self):
-        return self._get("/codes")
+    def list_codes(self, expected_status: int = 200) -> list[Any]:
+        return self._get("/codes", expected_status)
+
+    def get_code_by_name(
+        self, code_name: str, expected_status: int = 200
+    ) -> dict[str, Any]:
+        return self._get(f"/codes/name/{code_name}", expected_status)
+
+    def get_code_values(self, code_id: int, expected_status: int = 200) -> list[Any]:
+        return self._get(f"/codes/{code_id}/codevalues", expected_status)
+
+    def create_code_values(
+        self, code_id: int, code_values: dict[str, Any], expected_status: int = 200
+    ) -> dict[str, Any]:
+        return self._post(f"/codes/{code_id}/codevalues", code_values, expected_status)

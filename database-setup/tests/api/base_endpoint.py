@@ -27,9 +27,7 @@ class BaseEndpoint:
         except requests.RequestException:
             raise
 
-    def _get(
-        self, endpoint: str, expected_status: int = 200, **kwargs: Any
-    ) -> dict[str, Any]:
+    def _get(self, endpoint: str, expected_status: int = 200, **kwargs: Any) -> Any:
         return self._request("GET", endpoint, expected_status, **kwargs).json()
 
     def _post(
@@ -37,8 +35,18 @@ class BaseEndpoint:
         endpoint: str,
         json_body: dict[str, Any],
         expected_status: int = 200,
+        expect_json: bool = True,
         **kwargs: Any,
-    ) -> dict[str, Any]:
-        return self._request(
+    ) -> Any:
+        response = self._request(
             "POST", endpoint, expected_status, json=json_body, **kwargs
-        ).json()
+        )
+        
+        if not expect_json:
+            if response.text.strip():
+                raise Exception(
+                    f"Expected empty response but got body for POST {self._url(endpoint)}: {response.text}"
+                )
+            return None
+
+        return response.json()

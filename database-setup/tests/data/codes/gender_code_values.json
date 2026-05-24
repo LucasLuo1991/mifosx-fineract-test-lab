@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Male Gender",
+    "isActive": true,
+    "name": "Male",
+    "position": 0
+  },
+  {
+    "description": "Female Gender",
+    "isActive": true,
+    "name": "Female",
+    "position": 1
+  },
+  {
+    "description": "Non-Binary Gender",
+    "isActive": true,
+    "name": "Non-Binary",
+    "position": 2
+  }
+]
