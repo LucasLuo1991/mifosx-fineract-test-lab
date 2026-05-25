@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Australia",
+    "isActive": true,
+    "name": "Australia",
+    "position": 0
+  },
+  {
+    "description": "United States",
+    "isActive": true,
+    "name": "United States",
+    "position": 1
+  },
+  {
+    "description": "India",
+    "isActive": true,
+    "name": "India",
+    "position": 2
+  }
+]

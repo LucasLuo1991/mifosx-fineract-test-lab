@@ -1,0 +1,38 @@
+[
+  {
+    "description": "Spouse or domestic partner relationship",
+    "isActive": true,
+    "name": "Spouse",
+    "position": 0
+  },
+  {
+    "description": "Parent or legal guardian relationship",
+    "isActive": true,
+    "name": "Parent",
+    "position": 1
+  },
+  {
+    "description": "Child or dependent relationship",
+    "isActive": true,
+    "name": "Child",
+    "position": 2
+  },
+  {
+    "description": "Sibling relationship",
+    "isActive": true,
+    "name": "Sibling",
+    "position": 3
+  },
+  {
+    "description": "Other family member relationship",
+    "isActive": true,
+    "name": "Other Relative",
+    "position": 4
+  },
+  {
+    "description": "Non-family personal contact relationship",
+    "isActive": true,
+    "name": "Friend",
+    "position": 5
+  }
+]

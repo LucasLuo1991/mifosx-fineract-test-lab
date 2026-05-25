@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Buydown fee paid by borrower",
+    "isActive": true,
+    "name": "Borrower Paid",
+    "position": 0
+  },
+  {
+    "description": "Buydown fee paid by sponsor",
+    "isActive": true,
+    "name": "Sponsor Paid",
+    "position": 1
+  }
+]

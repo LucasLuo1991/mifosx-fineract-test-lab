@@ -1,0 +1,44 @@
+[
+  {
+    "description": "Client is employed by an organization",
+    "isActive": true,
+    "name": "Salaried Employee",
+    "position": 0
+  },
+  {
+    "description": "Client operates their own business",
+    "isActive": true,
+    "name": "Business Owner",
+    "position": 1
+  },
+  {
+    "description": "Client works independently as a professional or contractor",
+    "isActive": true,
+    "name": "Self-Employed",
+    "position": 2
+  },
+  {
+    "description": "Client earns income from farming or agriculture",
+    "isActive": true,
+    "name": "Farmer",
+    "position": 3
+  },
+  {
+    "description": "Client is studying full time or part time",
+    "isActive": true,
+    "name": "Student",
+    "position": 4
+  },
+  {
+    "description": "Client is retired from regular employment",
+    "isActive": true,
+    "name": "Retired",
+    "position": 5
+  },
+  {
+    "description": "Client is not currently employed",
+    "isActive": true,
+    "name": "Unemployed",
+    "position": 6
+  }
+]

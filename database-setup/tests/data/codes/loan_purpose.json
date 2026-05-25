@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Loan used for working capital",
+    "isActive": true,
+    "name": "Working Capital",
+    "position": 0
+  },
+  {
+    "description": "Loan used for education expenses",
+    "isActive": true,
+    "name": "Education",
+    "position": 1
+  },
+  {
+    "description": "Loan used for household improvement",
+    "isActive": true,
+    "name": "Home Improvement",
+    "position": 2
+  }
+]

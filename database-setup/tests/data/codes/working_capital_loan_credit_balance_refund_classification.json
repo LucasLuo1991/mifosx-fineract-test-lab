@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Refund of excess borrower payment",
+    "isActive": true,
+    "name": "Excess Payment Refund",
+    "position": 0
+  },
+  {
+    "description": "Refund after loan closure",
+    "isActive": true,
+    "name": "Closure Refund",
+    "position": 1
+  }
+]

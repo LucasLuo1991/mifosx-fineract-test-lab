@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Interest income account",
+    "isActive": true,
+    "name": "Interest Income",
+    "position": 0
+  },
+  {
+    "description": "Fee income account",
+    "isActive": true,
+    "name": "Fee Income",
+    "position": 1
+  },
+  {
+    "description": "Penalty income account",
+    "isActive": true,
+    "name": "Penalty Income",
+    "position": 2
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "description": "Standard retail banking client",
+    "isActive": true,
+    "name": "Retail",
+    "position": 0
+  },
+  {
+    "description": "Client receiving priority banking services",
+    "isActive": true,
+    "name": "Priority",
+    "position": 1
+  },
+  {
+    "description": "High net worth banking client",
+    "isActive": true,
+    "name": "High Net Worth",
+    "position": 2
+  },
+  {
+    "description": "Commercial banking client",
+    "isActive": true,
+    "name": "Commercial",
+    "position": 3
+  },
+  {
+    "description": "Client with elevated compliance monitoring requirements",
+    "isActive": true,
+    "name": "Enhanced Due Diligence",
+    "position": 4
+  }
+]

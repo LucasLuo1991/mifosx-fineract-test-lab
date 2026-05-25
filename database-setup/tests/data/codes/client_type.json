@@ -1,0 +1,32 @@
+[
+  {
+    "description": "Individual retail banking client",
+    "isActive": true,
+    "name": "Individual",
+    "position": 0
+  },
+  {
+    "description": "Small business banking client",
+    "isActive": true,
+    "name": "Small Business",
+    "position": 1
+  },
+  {
+    "description": "Corporate banking client",
+    "isActive": true,
+    "name": "Corporate",
+    "position": 2
+  },
+  {
+    "description": "Nonprofit organization banking client",
+    "isActive": true,
+    "name": "Nonprofit Organization",
+    "position": 3
+  },
+  {
+    "description": "Government or public sector banking client",
+    "isActive": true,
+    "name": "Government",
+    "position": 4
+  }
+]

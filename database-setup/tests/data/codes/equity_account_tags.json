@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Member share capital equity account",
+    "isActive": true,
+    "name": "Share Capital",
+    "position": 0
+  },
+  {
+    "description": "Retained earnings equity account",
+    "isActive": true,
+    "name": "Retained Earnings",
+    "position": 1
+  }
+]

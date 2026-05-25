@@ -1,0 +1,38 @@
+[
+  {
+    "description": "Client has never been married",
+    "isActive": true,
+    "name": "Single",
+    "position": 0
+  },
+  {
+    "description": "Client is legally married",
+    "isActive": true,
+    "name": "Married",
+    "position": 1
+  },
+  {
+    "description": "Client is divorced",
+    "isActive": true,
+    "name": "Divorced",
+    "position": 2
+  },
+  {
+    "description": "Client is separated from their spouse",
+    "isActive": true,
+    "name": "Separated",
+    "position": 3
+  },
+  {
+    "description": "Client's spouse has died",
+    "isActive": true,
+    "name": "Widowed",
+    "position": 4
+  },
+  {
+    "description": "Client is in a domestic partnership or civil union",
+    "isActive": true,
+    "name": "Domestic Partnership",
+    "position": 5
+  }
+]

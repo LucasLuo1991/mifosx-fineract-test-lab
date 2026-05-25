@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Debit transactions frozen during compliance review",
+    "isActive": true,
+    "name": "Compliance Review",
+    "position": 0
+  },
+  {
+    "description": "Debit transactions frozen after a client dispute",
+    "isActive": true,
+    "name": "Client Dispute",
+    "position": 1
+  }
+]

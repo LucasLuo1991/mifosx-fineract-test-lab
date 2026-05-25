@@ -1,0 +1,32 @@
+[
+  {
+    "description": "Client withdrew the application before approval",
+    "isActive": true,
+    "name": "Client Withdrew Application",
+    "position": 0
+  },
+  {
+    "description": "Client chose a different financial institution",
+    "isActive": true,
+    "name": "Selected Another Bank",
+    "position": 1
+  },
+  {
+    "description": "Client no longer needed the requested banking service",
+    "isActive": true,
+    "name": "No Longer Required",
+    "position": 2
+  },
+  {
+    "description": "Client did not accept the offered product terms",
+    "isActive": true,
+    "name": "Terms Not Accepted",
+    "position": 3
+  },
+  {
+    "description": "Client did not provide requested follow-up information",
+    "isActive": true,
+    "name": "Follow-Up Not Provided",
+    "position": 4
+  }
+]

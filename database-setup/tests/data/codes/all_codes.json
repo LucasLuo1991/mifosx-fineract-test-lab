@@ -1,0 +1,237 @@
+[
+    {
+        "id": 29,
+        "name": "ADDRESS_TYPE",
+        "systemDefined": true
+    },
+    {
+        "id": 7,
+        "name": "AssetAccountTags",
+        "systemDefined": true
+    },
+    {
+        "id": 41,
+        "name": "buydown_fee_transaction_classification",
+        "systemDefined": true
+    },
+    {
+        "id": 40,
+        "name": "capitalized_income_transaction_classification",
+        "systemDefined": true
+    },
+    {
+        "id": 22,
+        "name": "CenterClosureReason",
+        "systemDefined": true
+    },
+    {
+        "id": 39,
+        "name": "ChargeOffReasons",
+        "systemDefined": true
+    },
+    {
+        "id": 17,
+        "name": "ClientClassification",
+        "systemDefined": true
+    },
+    {
+        "id": 14,
+        "name": "ClientClosureReason",
+        "systemDefined": true
+    },
+    {
+        "id": 19,
+        "name": "ClientRejectReason",
+        "systemDefined": true
+    },
+    {
+        "id": 18,
+        "name": "ClientSubStatus",
+        "systemDefined": true
+    },
+    {
+        "id": 16,
+        "name": "ClientType",
+        "systemDefined": true
+    },
+    {
+        "id": 20,
+        "name": "ClientWithdrawReason",
+        "systemDefined": true
+    },
+    {
+        "id": 24,
+        "name": "Constitution",
+        "systemDefined": true
+    },
+    {
+        "id": 28,
+        "name": "COUNTRY",
+        "systemDefined": true
+    },
+    {
+        "id": 37,
+        "name": "CreditTransactionFreezeReasons",
+        "systemDefined": true
+    },
+    {
+        "id": 34,
+        "name": "Customer Documents",
+        "systemDefined": true
+    },
+    {
+        "id": 1,
+        "name": "Customer Identifier",
+        "systemDefined": true
+    },
+    {
+        "id": 36,
+        "name": "DebitTransactionFreezeReasons",
+        "systemDefined": true
+    },
+    {
+        "id": 21,
+        "name": "Entity to Entity Access Types",
+        "systemDefined": true
+    },
+    {
+        "id": 9,
+        "name": "EquityAccountTags",
+        "systemDefined": true
+    },
+    {
+        "id": 11,
+        "name": "ExpenseAccountTags",
+        "systemDefined": true
+    },
+    {
+        "id": 4,
+        "name": "Gender",
+        "systemDefined": true
+    },
+    {
+        "id": 15,
+        "name": "GroupClosureReason",
+        "systemDefined": true
+    },
+    {
+        "id": 13,
+        "name": "GROUPROLE",
+        "systemDefined": true
+    },
+    {
+        "id": 6,
+        "name": "GuarantorRelationship",
+        "systemDefined": true
+    },
+    {
+        "id": 10,
+        "name": "IncomeAccountTags",
+        "systemDefined": true
+    },
+    {
+        "id": 8,
+        "name": "LiabilityAccountTags",
+        "systemDefined": true
+    },
+    {
+        "id": 2,
+        "name": "LoanCollateral",
+        "systemDefined": true
+    },
+    {
+        "id": 45,
+        "name": "LoanOriginationChannelType",
+        "systemDefined": true
+    },
+    {
+        "id": 44,
+        "name": "LoanOriginatorType",
+        "systemDefined": true
+    },
+    {
+        "id": 3,
+        "name": "LoanPurpose",
+        "systemDefined": true
+    },
+    {
+        "id": 23,
+        "name": "LoanRescheduleReason",
+        "systemDefined": true
+    },
+    {
+        "id": 25,
+        "name": "Main Business Line",
+        "systemDefined": true
+    },
+    {
+        "id": 30,
+        "name": "MARITAL STATUS",
+        "systemDefined": true
+    },
+    {
+        "id": 33,
+        "name": "PaymentType",
+        "systemDefined": true
+    },
+    {
+        "id": 32,
+        "name": "PROFESSION",
+        "systemDefined": true
+    },
+    {
+        "id": 42,
+        "name": "ReAgeReasons",
+        "systemDefined": true
+    },
+    {
+        "id": 43,
+        "name": "ReAmortizationReasons",
+        "systemDefined": true
+    },
+    {
+        "id": 31,
+        "name": "RELATIONSHIP",
+        "systemDefined": true
+    },
+    {
+        "id": 35,
+        "name": "SavingsAccountBlockReasons",
+        "systemDefined": true
+    },
+    {
+        "id": 38,
+        "name": "SavingsTransactionFreezeReasons",
+        "systemDefined": true
+    },
+    {
+        "id": 27,
+        "name": "STATE",
+        "systemDefined": true
+    },
+    {
+        "id": 48,
+        "name": "working_capital_loan_credit_balance_refund_classification",
+        "systemDefined": true
+    },
+    {
+        "id": 46,
+        "name": "working_capital_loan_disbursement_classification",
+        "systemDefined": true
+    },
+    {
+        "id": 47,
+        "name": "working_capital_loan_repayment_classification",
+        "systemDefined": true
+    },
+    {
+        "id": 26,
+        "name": "WriteOffReasons",
+        "systemDefined": true
+    },
+    {
+        "id": 5,
+        "name": "YesNo",
+        "systemDefined": true
+    }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "description": "Client is awaiting completion of required onboarding checks",
+    "isActive": true,
+    "name": "Pending Onboarding",
+    "position": 0
+  },
+  {
+    "description": "Client is awaiting Know Your Customer verification",
+    "isActive": true,
+    "name": "Pending KYC",
+    "position": 1
+  },
+  {
+    "description": "Client account is under compliance review",
+    "isActive": true,
+    "name": "Under Compliance Review",
+    "position": 2
+  },
+  {
+    "description": "Client access is temporarily suspended",
+    "isActive": true,
+    "name": "Temporarily Suspended",
+    "position": 3
+  },
+  {
+    "description": "Client is approved and ready for account activation",
+    "isActive": true,
+    "name": "Ready for Activation",
+    "position": 4
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Scheduled working capital loan repayment",
+    "isActive": true,
+    "name": "Scheduled Repayment",
+    "position": 0
+  },
+  {
+    "description": "Early working capital loan repayment",
+    "isActive": true,
+    "name": "Early Repayment",
+    "position": 1
+  }
+]

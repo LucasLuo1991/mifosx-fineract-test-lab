@@ -1,0 +1,32 @@
+[
+  {
+    "description": "Group chairperson or leader",
+    "isActive": true,
+    "name": "Chairperson",
+    "position": 0
+  },
+  {
+    "description": "Group secretary",
+    "isActive": true,
+    "name": "Secretary",
+    "position": 1
+  },
+  {
+    "description": "Group treasurer",
+    "isActive": true,
+    "name": "Treasurer",
+    "position": 2
+  },
+  {
+    "description": "Regular group member",
+    "isActive": true,
+    "name": "Member",
+    "position": 3
+  },
+  {
+    "description": "Authorized group signatory",
+    "isActive": true,
+    "name": "Signatory",
+    "position": 4
+  }
+]

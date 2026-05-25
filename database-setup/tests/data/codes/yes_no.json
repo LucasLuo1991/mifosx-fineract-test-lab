@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Affirmative response",
+    "isActive": true,
+    "name": "Yes",
+    "position": 0
+  },
+  {
+    "description": "Negative response",
+    "isActive": true,
+    "name": "No",
+    "position": 1
+  }
+]

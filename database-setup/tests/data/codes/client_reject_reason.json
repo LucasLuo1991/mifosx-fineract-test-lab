@@ -1,0 +1,32 @@
+[
+  {
+    "description": "Required identification documents were not provided",
+    "isActive": true,
+    "name": "Missing Identification",
+    "position": 0
+  },
+  {
+    "description": "Know Your Customer verification could not be completed",
+    "isActive": true,
+    "name": "KYC Verification Failed",
+    "position": 1
+  },
+  {
+    "description": "Client application failed risk assessment",
+    "isActive": true,
+    "name": "Risk Assessment Failed",
+    "position": 2
+  },
+  {
+    "description": "Client application had incomplete or inconsistent information",
+    "isActive": true,
+    "name": "Incomplete Application",
+    "position": 3
+  },
+  {
+    "description": "Client application failed sanctions or watchlist screening",
+    "isActive": true,
+    "name": "Sanctions Screening Failed",
+    "position": 4
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Government-issued passport identifier",
+    "isActive": true,
+    "name": "Passport",
+    "position": 0
+  },
+  {
+    "description": "National identification number",
+    "isActive": true,
+    "name": "National ID",
+    "position": 1
+  },
+  {
+    "description": "Driver license identifier",
+    "isActive": true,
+    "name": "Driver License",
+    "position": 2
+  }
+]

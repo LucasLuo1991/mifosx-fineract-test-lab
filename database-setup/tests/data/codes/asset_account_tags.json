@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Cash and cash equivalent asset account",
+    "isActive": true,
+    "name": "Cash",
+    "position": 0
+  },
+  {
+    "description": "Loan portfolio asset account",
+    "isActive": true,
+    "name": "Loan Portfolio",
+    "position": 1
+  },
+  {
+    "description": "Receivable asset account",
+    "isActive": true,
+    "name": "Receivables",
+    "position": 2
+  }
+]

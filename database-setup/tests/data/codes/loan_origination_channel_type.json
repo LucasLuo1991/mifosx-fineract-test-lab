@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Loan originated through a branch office",
+    "isActive": true,
+    "name": "Branch",
+    "position": 0
+  },
+  {
+    "description": "Loan originated through a mobile channel",
+    "isActive": true,
+    "name": "Mobile",
+    "position": 1
+  },
+  {
+    "description": "Loan originated through an agent",
+    "isActive": true,
+    "name": "Agent",
+    "position": 2
+  }
+]

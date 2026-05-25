@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Proof of identity document",
+    "isActive": true,
+    "name": "Proof of Identity",
+    "position": 0
+  },
+  {
+    "description": "Proof of address document",
+    "isActive": true,
+    "name": "Proof of Address",
+    "position": 1
+  },
+  {
+    "description": "Income verification document",
+    "isActive": true,
+    "name": "Income Verification",
+    "position": 2
+  }
+]

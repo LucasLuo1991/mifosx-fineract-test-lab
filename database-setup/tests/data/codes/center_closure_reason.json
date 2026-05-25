@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Center closed because all groups have graduated",
+    "isActive": true,
+    "name": "Groups Graduated",
+    "position": 0
+  },
+  {
+    "description": "Center closed because members are inactive",
+    "isActive": true,
+    "name": "Inactive Members",
+    "position": 1
+  },
+  {
+    "description": "Center closed after consolidation into another center",
+    "isActive": true,
+    "name": "Merged with Another Center",
+    "position": 2
+  }
+]

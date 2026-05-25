@@ -1,0 +1,32 @@
+[
+  {
+    "description": "Group requested closure",
+    "isActive": true,
+    "name": "Group Request",
+    "position": 0
+  },
+  {
+    "description": "Group became inactive",
+    "isActive": true,
+    "name": "Inactive Group",
+    "position": 1
+  },
+  {
+    "description": "Group merged with another group",
+    "isActive": true,
+    "name": "Merged with Another Group",
+    "position": 2
+  },
+  {
+    "description": "Group dissolved by its members",
+    "isActive": true,
+    "name": "Group Dissolved",
+    "position": 3
+  },
+  {
+    "description": "Group no longer meets eligibility requirements",
+    "isActive": true,
+    "name": "Eligibility Requirements Not Met",
+    "position": 4
+  }
+]

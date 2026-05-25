@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Account re-aged after hardship review",
+    "isActive": true,
+    "name": "Hardship Review",
+    "position": 0
+  },
+  {
+    "description": "Account re-aged after payment arrangement",
+    "isActive": true,
+    "name": "Payment Arrangement",
+    "position": 1
+  }
+]

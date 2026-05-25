@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Savings account blocked during compliance review",
+    "isActive": true,
+    "name": "Compliance Review",
+    "position": 0
+  },
+  {
+    "description": "Savings account blocked because of a court order",
+    "isActive": true,
+    "name": "Court Order",
+    "position": 1
+  },
+  {
+    "description": "Savings account blocked because of suspected fraud",
+    "isActive": true,
+    "name": "Suspected Fraud",
+    "position": 2
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Loan originated by an internal staff member",
+    "isActive": true,
+    "name": "Staff",
+    "position": 0
+  },
+  {
+    "description": "Loan originated by a partner organization",
+    "isActive": true,
+    "name": "Partner",
+    "position": 1
+  },
+  {
+    "description": "Loan originated by a digital channel",
+    "isActive": true,
+    "name": "Digital Channel",
+    "position": 2
+  }
+]

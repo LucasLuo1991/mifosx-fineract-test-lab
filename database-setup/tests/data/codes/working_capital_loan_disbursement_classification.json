@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Initial working capital disbursement",
+    "isActive": true,
+    "name": "Initial Disbursement",
+    "position": 0
+  },
+  {
+    "description": "Supplemental working capital disbursement",
+    "isActive": true,
+    "name": "Supplemental Disbursement",
+    "position": 1
+  }
+]

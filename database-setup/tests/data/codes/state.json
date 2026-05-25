@@ -1,0 +1,20 @@
+[
+  {
+    "description": "New South Wales",
+    "isActive": true,
+    "name": "New South Wales",
+    "position": 0
+  },
+  {
+    "description": "California",
+    "isActive": true,
+    "name": "California",
+    "position": 1
+  },
+  {
+    "description": "Karnataka",
+    "isActive": true,
+    "name": "Karnataka",
+    "position": 2
+  }
+]

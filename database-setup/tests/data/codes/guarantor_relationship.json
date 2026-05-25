@@ -1,0 +1,38 @@
+[
+  {
+    "description": "Guarantor is the client's spouse or domestic partner",
+    "isActive": true,
+    "name": "Spouse",
+    "position": 0
+  },
+  {
+    "description": "Guarantor is the client's parent or legal guardian",
+    "isActive": true,
+    "name": "Parent",
+    "position": 1
+  },
+  {
+    "description": "Guarantor is the client's sibling",
+    "isActive": true,
+    "name": "Sibling",
+    "position": 2
+  },
+  {
+    "description": "Guarantor is another family member of the client",
+    "isActive": true,
+    "name": "Other Relative",
+    "position": 3
+  },
+  {
+    "description": "Guarantor is the client's employer",
+    "isActive": true,
+    "name": "Employer",
+    "position": 4
+  },
+  {
+    "description": "Guarantor is the client's business partner",
+    "isActive": true,
+    "name": "Business Partner",
+    "position": 5
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Interest income capitalized into the loan balance",
+    "isActive": true,
+    "name": "Capitalized Interest",
+    "position": 0
+  },
+  {
+    "description": "Fee income capitalized into the loan balance",
+    "isActive": true,
+    "name": "Capitalized Fee",
+    "position": 1
+  }
+]

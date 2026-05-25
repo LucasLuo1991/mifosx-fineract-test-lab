@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Operating expense account",
+    "isActive": true,
+    "name": "Operating Expense",
+    "position": 0
+  },
+  {
+    "description": "Provision expense account",
+    "isActive": true,
+    "name": "Provision Expense",
+    "position": 1
+  }
+]

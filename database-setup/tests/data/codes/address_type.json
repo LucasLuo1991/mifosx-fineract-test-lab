@@ -1,0 +1,32 @@
+[
+  {
+    "description": "Client's current residential address",
+    "isActive": true,
+    "name": "Residential",
+    "position": 0
+  },
+  {
+    "description": "Client's permanent home address",
+    "isActive": true,
+    "name": "Permanent",
+    "position": 1
+  },
+  {
+    "description": "Client's mailing or correspondence address",
+    "isActive": true,
+    "name": "Mailing",
+    "position": 2
+  },
+  {
+    "description": "Client's business or workplace address",
+    "isActive": true,
+    "name": "Business",
+    "position": 3
+  },
+  {
+    "description": "Address used for billing or statements",
+    "isActive": true,
+    "name": "Billing",
+    "position": 4
+  }
+]

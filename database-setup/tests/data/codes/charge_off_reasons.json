@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Loan charged off because collection attempts were exhausted",
+    "isActive": true,
+    "name": "Collections Exhausted",
+    "position": 0
+  },
+  {
+    "description": "Loan charged off because the borrower cannot be located",
+    "isActive": true,
+    "name": "Borrower Unreachable",
+    "position": 1
+  },
+  {
+    "description": "Loan charged off due to borrower insolvency",
+    "isActive": true,
+    "name": "Borrower Insolvent",
+    "position": 2
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Payment made in cash",
+    "isActive": true,
+    "name": "Cash",
+    "position": 0
+  },
+  {
+    "description": "Payment made by bank transfer",
+    "isActive": true,
+    "name": "Bank Transfer",
+    "position": 1
+  },
+  {
+    "description": "Payment made by cheque",
+    "isActive": true,
+    "name": "Cheque",
+    "position": 2
+  }
+]

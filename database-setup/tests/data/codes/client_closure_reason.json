@@ -1,0 +1,32 @@
+[
+  {
+    "description": "Client requested account closure",
+    "isActive": true,
+    "name": "Client Request",
+    "position": 0
+  },
+  {
+    "description": "Client moved banking relationship to another institution",
+    "isActive": true,
+    "name": "Transferred to Another Bank",
+    "position": 1
+  },
+  {
+    "description": "Client record closed due to inactivity",
+    "isActive": true,
+    "name": "Inactive Client",
+    "position": 2
+  },
+  {
+    "description": "Client no longer meets bank eligibility requirements",
+    "isActive": true,
+    "name": "Eligibility Requirements Not Met",
+    "position": 3
+  },
+  {
+    "description": "Client record closed after client death",
+    "isActive": true,
+    "name": "Deceased",
+    "position": 4
+  }
+]

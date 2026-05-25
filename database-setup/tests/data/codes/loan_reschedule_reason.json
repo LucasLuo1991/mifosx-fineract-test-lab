@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Loan rescheduled because of temporary income interruption",
+    "isActive": true,
+    "name": "Income Interruption",
+    "position": 0
+  },
+  {
+    "description": "Loan rescheduled because of disaster impact",
+    "isActive": true,
+    "name": "Disaster Impact",
+    "position": 1
+  },
+  {
+    "description": "Loan rescheduled after borrower hardship review",
+    "isActive": true,
+    "name": "Borrower Hardship",
+    "position": 2
+  }
+]

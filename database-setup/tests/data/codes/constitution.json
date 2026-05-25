@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Sole proprietorship constitution",
+    "isActive": true,
+    "name": "Sole Proprietorship",
+    "position": 0
+  },
+  {
+    "description": "Partnership constitution",
+    "isActive": true,
+    "name": "Partnership",
+    "position": 1
+  },
+  {
+    "description": "Private limited company constitution",
+    "isActive": true,
+    "name": "Private Limited Company",
+    "position": 2
+  }
+]

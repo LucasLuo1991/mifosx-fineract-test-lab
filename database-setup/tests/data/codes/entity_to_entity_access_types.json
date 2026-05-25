@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Access granted for read-only operations",
+    "isActive": true,
+    "name": "Read Only",
+    "position": 0
+  },
+  {
+    "description": "Access granted for operational updates",
+    "isActive": true,
+    "name": "Operational Access",
+    "position": 1
+  },
+  {
+    "description": "Access granted for administrative actions",
+    "isActive": true,
+    "name": "Administrative Access",
+    "position": 2
+  }
+]

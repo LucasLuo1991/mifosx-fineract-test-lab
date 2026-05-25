@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Loan re-amortized after term extension",
+    "isActive": true,
+    "name": "Term Extension",
+    "position": 0
+  },
+  {
+    "description": "Loan re-amortized after rate change",
+    "isActive": true,
+    "name": "Rate Change",
+    "position": 1
+  }
+]

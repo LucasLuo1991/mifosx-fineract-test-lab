@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Land or building collateral",
+    "isActive": true,
+    "name": "Real Estate",
+    "position": 0
+  },
+  {
+    "description": "Vehicle collateral",
+    "isActive": true,
+    "name": "Vehicle",
+    "position": 1
+  },
+  {
+    "description": "Equipment collateral",
+    "isActive": true,
+    "name": "Equipment",
+    "position": 2
+  }
+]

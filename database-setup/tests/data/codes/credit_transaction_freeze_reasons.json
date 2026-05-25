@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Credit transactions frozen during compliance review",
+    "isActive": true,
+    "name": "Compliance Review",
+    "position": 0
+  },
+  {
+    "description": "Credit transactions frozen because of suspected fraud",
+    "isActive": true,
+    "name": "Suspected Fraud",
+    "position": 1
+  }
+]

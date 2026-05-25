@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Retail trade business line",
+    "isActive": true,
+    "name": "Retail Trade",
+    "position": 0
+  },
+  {
+    "description": "Agriculture business line",
+    "isActive": true,
+    "name": "Agriculture",
+    "position": 1
+  },
+  {
+    "description": "Services business line",
+    "isActive": true,
+    "name": "Services",
+    "position": 2
+  }
+]

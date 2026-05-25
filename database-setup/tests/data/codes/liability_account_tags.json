@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Savings deposit liability account",
+    "isActive": true,
+    "name": "Savings Deposits",
+    "position": 0
+  },
+  {
+    "description": "Borrowings liability account",
+    "isActive": true,
+    "name": "Borrowings",
+    "position": 1
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "description": "Loan or account balance written off because the client is unable to pay",
+    "isActive": true,
+    "name": "Client Unable to Pay",
+    "position": 0
+  },
+  {
+    "description": "Balance written off after exhausting collection efforts",
+    "isActive": true,
+    "name": "Collection Efforts Exhausted",
+    "position": 1
+  },
+  {
+    "description": "Balance written off due to client death",
+    "isActive": true,
+    "name": "Client Deceased",
+    "position": 2
+  },
+  {
+    "description": "Balance written off because the client cannot be located",
+    "isActive": true,
+    "name": "Client Unreachable",
+    "position": 3
+  },
+  {
+    "description": "Balance written off as a small residual amount",
+    "isActive": true,
+    "name": "Small Balance Write-Off",
+    "position": 4
+  }
+]
