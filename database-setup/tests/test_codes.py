@@ -2,7 +2,7 @@ import pytest
 from api.api_client import FineractApiClient
 from api.endpoints.codes import CodesEndpoint
 from sqlalchemy.engine import Connection
-from helpers.codes.code_values import (
+from helpers.code_values import (
     assert_code_values_present,
     create_missing_code_values,
     load_code_values,
@@ -17,7 +17,7 @@ def codes_api(authenticated_api_client: FineractApiClient):
 @pytest.mark.parametrize(
     ("tested_code_name", "code_values_file_name"),
     [
-        ("Gender", "gender_code_values.json"),
+        ("Gender", "gender.json"),
     ],
 )
 def test_code_values_are_seeded(

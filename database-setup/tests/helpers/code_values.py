@@ -6,7 +6,7 @@ from sqlalchemy import text
 from sqlalchemy.engine import Connection
 from utils.json_loader import load_json
 
-CODE_VALUES_DATA_DIR = Path(__file__).parents[2] / "data" / "codes"
+CODE_VALUES_DATA_DIR = Path(__file__).parents[1] / "data" / "codes"
 
 CODE_VALUE_NAMES_BY_CODE_NAME_QUERY = text("""
     SELECT

@@ -1,5 +1,5 @@
 import requests
-from api.endpoints.codes import CodesEndpoint
+import api.endpoints as endpoints
 
 
 class FineractApiClient:
@@ -13,7 +13,7 @@ class FineractApiClient:
         self.request_timeout_seconds = 30
         self.session = requests.Session()
 
-        self.codes = CodesEndpoint(
+        self.codes = endpoints.CodesEndpoint(
             self.session, self.api_base_url
         )  # Initialize endpoint instances here if needed
 
