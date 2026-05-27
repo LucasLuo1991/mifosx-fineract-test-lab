@@ -1,0 +1,42 @@
+[
+    {
+        "dateFormat": "dd MMMM yyyy",
+        "externalId": "OFF-001",
+        "locale": "en",
+        "name": "Central Branch",
+        "openingDate": "2024-01-15",
+        "parentId": 1
+    },
+    {
+        "dateFormat": "dd MMMM yyyy",
+        "externalId": "OFF-002",
+        "locale": "en",
+        "name": "Northside Office",
+        "openingDate": "2024-03-01",
+        "parentId": 1
+    },
+    {
+        "dateFormat": "dd MMMM yyyy",
+        "externalId": "OFF-003",
+        "locale": "en",
+        "name": "West End Office",
+        "openingDate": "2025-07-10",
+        "parentId": 2
+    },
+    {
+        "dateFormat": "dd MMMM yyyy",
+        "externalId": "OFF-004",
+        "locale": "en",
+        "name": "Eastside Outreach",
+        "openingDate": "2025-11-05",
+        "parentId": 3
+    },
+    {
+        "dateFormat": "dd MMMM yyyy",
+        "externalId": "OFF-005",
+        "locale": "en",
+        "name": "Riverside Hub",
+        "openingDate": "2026-02-20",
+        "parentId": 2
+    }
+]

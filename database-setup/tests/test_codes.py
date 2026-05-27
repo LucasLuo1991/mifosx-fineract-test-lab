@@ -10,8 +10,8 @@ from helpers.code_values import (
 
 
 @pytest.fixture(scope="module")
-def codes_api(authenticated_api_client: FineractApiClient):
-    return authenticated_api_client.codes
+def codes_api(authenticated_api_client: FineractApiClient) -> CodesEndpoint:
+    return authenticated_api_client.codes # type: ignore
 
 
 @pytest.mark.parametrize(

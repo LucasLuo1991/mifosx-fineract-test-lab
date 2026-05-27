@@ -1,6 +1,13 @@
-from typing import Any
+from typing import Any, TypedDict
 
 from api.base_endpoint import BaseEndpoint
+
+
+class CodeValuePayload(TypedDict):
+    name: str
+    description: str
+    position: int
+    isActive: bool
 
 
 class CodesEndpoint(BaseEndpoint):
@@ -23,13 +30,22 @@ class CodesEndpoint(BaseEndpoint):
         return self._get(f"/codes/{code_id}/codevalues", expected_status)
 
     def create_code_values_by_id(
-        self, code_id: int, code_value: dict[str, Any], expected_status: int = 200
-    ) -> dict[str, Any]:
-        return self._post(f"/codes/{code_id}/codevalues", code_value, expected_status)
-
-    def create_code_values_by_name(
-        self, code_name: str, code_value: dict[str, Any], expected_status: int = 200
+        self, code_id: int, code_value: CodeValuePayload, expected_status: int = 200
     ) -> dict[str, Any]:
         return self._post(
-            f"/codes/name/{code_name}/codevalues", code_value, expected_status
+            f"/codes/{code_id}/codevalues",
+            self._code_value_payload(code_value),
+            expected_status,
         )
+
+    def create_code_values_by_name(
+        self, code_name: str, code_value: CodeValuePayload, expected_status: int = 200
+    ) -> dict[str, Any]:
+        return self._post(
+            f"/codes/name/{code_name}/codevalues",
+            self._code_value_payload(code_value),
+            expected_status,
+        )
+
+    def _code_value_payload(self, code_value: CodeValuePayload) -> dict[str, Any]:
+        return dict(code_value)
