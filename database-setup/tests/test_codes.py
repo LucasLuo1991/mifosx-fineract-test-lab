@@ -2,7 +2,7 @@ import pytest
 from api.api_client import FineractApiClient
 from api.endpoints.codes import CodesEndpoint
 from sqlalchemy.engine import Connection
-from helpers.code_values import (
+from helpers.codes_helper import (
     assert_code_values_present,
     create_missing_code_values,
     load_code_values,
