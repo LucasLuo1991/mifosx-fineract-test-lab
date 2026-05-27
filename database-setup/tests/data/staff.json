@@ -1,0 +1,72 @@
+[
+    {
+        "dateFormat": "dd MMMM yyyy",
+        "emailAddress": "amina.patel@example.com",
+        "externalId": "STF-001",
+        "firstname": "Amina",
+        "display_name": "Patel, Amina",
+        "isActive": true,
+        "isLoanOfficer": true,
+        "joiningDate": "15 January 2024",
+        "lastname": "Patel",
+        "locale": "en",
+        "mobileNo": "5550101001",
+        "officeId": 1
+    },
+    {
+        "dateFormat": "dd MMMM yyyy",
+        "emailAddress": "marcus.chen@example.com",
+        "externalId": "STF-002",
+        "firstname": "Marcus",
+        "display_name": "Chen, Marcus",
+        "isActive": true,
+        "isLoanOfficer": false,
+        "joiningDate": "01 March 2024",
+        "lastname": "Chen",
+        "locale": "en",
+        "mobileNo": "5550101002",
+        "officeId": 1
+    },
+    {
+        "dateFormat": "dd MMMM yyyy",
+        "emailAddress": "sofia.ramirez@example.com",
+        "externalId": "STF-003",
+        "firstname": "Sofia",
+        "display_name": "Ramirez, Sofia",
+        "isActive": true,
+        "isLoanOfficer": true,
+        "joiningDate": "10 July 2025",
+        "lastname": "Ramirez",
+        "locale": "en",
+        "mobileNo": "5550101003",
+        "officeId": 1
+    },
+    {
+        "dateFormat": "dd MMMM yyyy",
+        "emailAddress": "daniel.okafor@example.com",
+        "externalId": "STF-004",
+        "firstname": "Daniel",
+        "display_name": "Okafor, Daniel",
+        "isActive": false,
+        "isLoanOfficer": false,
+        "joiningDate": "05 November 2025",
+        "lastname": "Okafor",
+        "locale": "en",
+        "mobileNo": "5550101004",
+        "officeId": 1
+    },
+    {
+        "dateFormat": "dd MMMM yyyy",
+        "emailAddress": "elena.kowalski@example.com",
+        "externalId": "STF-005",
+        "firstname": "Elena",
+        "display_name": "Kowalski, Elena",
+        "isActive": true,
+        "isLoanOfficer": true,
+        "joiningDate": "20 February 2026",
+        "lastname": "Kowalski",
+        "locale": "en",
+        "mobileNo": "5550101005",
+        "officeId": 1
+    }
+]
