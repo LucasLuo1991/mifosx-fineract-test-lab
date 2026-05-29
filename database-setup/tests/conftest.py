@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 from sqlalchemy import Engine, create_engine
 from sqlalchemy.engine import Connection
 from utils.config import FineractTestConfig, load_config_from_env
-from utils.urls import build_postgres_dsn
+from utils.health import wait_for_health_check
+from utils.urls import build_fineract_health_url, build_postgres_dsn
 
 load_dotenv(dotenv_path=Path(__file__).parents[2] / ".env")
 
@@ -15,6 +16,14 @@ load_dotenv(dotenv_path=Path(__file__).parents[2] / ".env")
 @pytest.fixture(scope="session")
 def config() -> FineractTestConfig:
     return load_config_from_env()
+
+
+@pytest.fixture(scope="session", autouse=True)
+def wait_for_service_healthy(config: FineractTestConfig) -> None:
+    try:
+        wait_for_health_check(build_fineract_health_url(config.server_url))
+    except TimeoutError as error:
+        pytest.exit(str(error))
 
 
 @pytest.fixture(scope="session")
