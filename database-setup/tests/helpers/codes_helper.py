@@ -35,10 +35,12 @@ CODE_VALUE_FIELD_MAPPINGS = (
 
 
 def load_code_values(file_name: str) -> list[CodeValuePayload]:
+    """Load code value seed payloads from the codes test data directory."""
     return cast(list[CodeValuePayload], load_seed_data(CODE_VALUES_DATA_DIR, file_name))
 
 
 def get_code_value_names(db_connection: Connection, code_name: str) -> set[str]:
+    """Return the code values currently stored for a Fineract code name."""
     result = db_connection.execute(
         CODE_VALUE_ROWS_BY_CODE_NAME_QUERY,
         {"code_name": code_name},
@@ -47,6 +49,7 @@ def get_code_value_names(db_connection: Connection, code_name: str) -> set[str]:
 
 
 def get_code_value_rows(db_connection: Connection, code_name: str):
+    """Return code value rows needed for seed verification."""
     result = db_connection.execute(
         CODE_VALUE_ROWS_BY_CODE_NAME_QUERY,
         {"code_name": code_name},
@@ -60,6 +63,7 @@ def create_missing_code_values(
     code_name: str,
     code_values: list[CodeValuePayload],
 ) -> None:
+    """Create missing code values and update existing values when fields differ."""
     existing_rows = get_code_value_rows(db_connection, code_name)
     existing_code_values = {row["code_value"] for row in existing_rows}
 
@@ -92,6 +96,7 @@ def assert_code_values_present(
     code_name: str,
     expected_code_values: list[CodeValuePayload],
 ) -> None:
+    """Assert that code value seed payloads match rows for a Fineract code."""
     assert_seed_items_match_db(
         expected_items=expected_code_values,
         actual_rows=get_code_value_rows(db_connection, code_name),
@@ -106,6 +111,7 @@ def _code_value_needs_update(
     expected_code_value: CodeValuePayload,
     actual_row: RowMapping,
 ) -> bool:
+    """Return whether an existing code value row differs from its seed payload."""
     expected_values = cast(Mapping[str, Any], expected_code_value)
 
     return any(

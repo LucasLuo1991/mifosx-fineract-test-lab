@@ -62,15 +62,18 @@ CHARGES_FIELD_MAPPINGS = (
 
 
 def load_charges(file_name: str) -> list[ChargePayload]:
+    """Load charge seed payloads from the shared test data directory."""
     return cast(list[ChargePayload], load_seed_data(CHARGES_DATA_DIR, file_name))
 
 
 def get_charges_names(db_connection: Connection) -> set[str]:
+    """Return the names of charges currently stored in Fineract."""
     result = db_connection.execute(CHARGES_NAMES_QUERY)
     return set(result.scalars())
 
 
 def get_charges_rows(db_connection: Connection):
+    """Return charge rows needed for seed verification."""
     result = db_connection.execute(CHARGES_ROWS_QUERY)
     return result.mappings().all()
 
@@ -80,6 +83,7 @@ def create_missing_charges(
     db_connection: Connection,
     charges: list[ChargePayload],
 ) -> None:
+    """Create charge records that are not already present by name."""
     existing_charges = get_charges_names(db_connection)
 
     create_missing_items(
@@ -93,6 +97,7 @@ def assert_charges_present(
     db_connection: Connection,
     charges: list[ChargePayload],
 ) -> None:
+    """Assert that charge seed payloads are present with matching DB fields."""
     assert_seed_items_match_db(
         expected_items=charges,
         actual_rows=get_charges_rows(db_connection),

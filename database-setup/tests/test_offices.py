@@ -11,6 +11,7 @@ from helpers.offices_helper import (
 
 @pytest.fixture(scope="module")
 def offices_api(authenticated_api_client: FineractApiClient) -> OfficesEndpoint:
+    """Return the authenticated offices endpoint helper."""
     return authenticated_api_client.offices # type: ignore
 
 
@@ -18,6 +19,7 @@ def test_offices_are_seeded(
     offices_api: OfficesEndpoint,
     db_connection: Connection
 ):
+    """Create missing offices and verify their database fields."""
     offices = load_offices("offices.json")
 
     create_missing_offices(

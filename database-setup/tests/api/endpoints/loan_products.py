@@ -6,6 +6,8 @@ Number = int | float
 
 
 class LoanProductPayload(TypedDict):
+    """Payload fields accepted by the Fineract loan products API."""
+
     name: str
     shortName: str
     description: str
@@ -51,6 +53,7 @@ class LoanProductsEndpoint(BaseEndpoint):
         self,
         expected_status: int = 200,
     ) -> list[Any]:
+        """Return loan products from the Fineract API."""
         return self._get(
             "/loanproducts",
             expected_status,
@@ -59,9 +62,11 @@ class LoanProductsEndpoint(BaseEndpoint):
     def create_loan_product(
         self, loan_product: LoanProductPayload, expected_status: int = 200
     ) -> dict[str, Any]:
+        """Create a Fineract loan product from a seed payload."""
         return self._post(
             "/loanproducts", self._loan_product_payload(loan_product), expected_status
         )
 
     def _loan_product_payload(self, loan_product: LoanProductPayload) -> dict[str, Any]:
+        """Convert a typed loan product payload to a mutable request body."""
         return dict(loan_product)

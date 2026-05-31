@@ -3,9 +3,12 @@ import requests
 
 
 class FineractApiClient:
+    """Authenticated requests session with discovered Fineract endpoint helpers."""
+
     def __init__(
         self, api_base_url: str, tenant_id: str, api_username: str, api_password: str
     ):
+        """Create the client and attach endpoint helpers to the instance."""
         self.api_base_url = api_base_url
         self.tenant_id = tenant_id
         self.api_username = api_username
@@ -25,6 +28,7 @@ class FineractApiClient:
             )
 
     def authenticate(self):
+        """Authenticate with Fineract and store the returned Basic auth header."""
         try:
             res = self.session.post(
                 f"{self.api_base_url}/authentication",
@@ -69,4 +73,5 @@ class FineractApiClient:
         )
 
     def close(self):
+        """Close the underlying requests session."""
         self.session.close()

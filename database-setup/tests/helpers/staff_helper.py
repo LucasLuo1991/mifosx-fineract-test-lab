@@ -49,15 +49,18 @@ STAFF_FIELD_MAPPINGS = (
 
 
 def load_staff(file_name: str) -> list[StaffPayload]:
+    """Load staff seed payloads from the shared test data directory."""
     return cast(list[StaffPayload], load_seed_data(STAFF_DATA_DIR, file_name))
 
 
 def get_staff_names(db_connection: Connection) -> set[str]:
+    """Return the display names of staff currently stored in Fineract."""
     result = db_connection.execute(STAFF_NAMES_QUERY)
     return set(result.scalars())
 
 
 def get_staff_rows(db_connection: Connection):
+    """Return staff rows needed for seed verification."""
     result = db_connection.execute(STAFF_ROWS_QUERY)
     return result.mappings().all()
 
@@ -67,6 +70,7 @@ def create_missing_staff(
     db_connection: Connection,
     staff_members: list[StaffPayload],
 ) -> None:
+    """Create staff records that are not already present by display name."""
     existing_staff = get_staff_names(db_connection)
 
     create_missing_items(
@@ -81,6 +85,7 @@ def assert_staff_present(
     db_connection: Connection,
     staff: list[StaffPayload],
 ) -> None:
+    """Assert that staff seed payloads are present with matching DB fields."""
     assert_seed_items_match_db(
         expected_items=staff,
         actual_rows=get_staff_rows(db_connection),

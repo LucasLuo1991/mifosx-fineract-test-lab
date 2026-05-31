@@ -11,6 +11,7 @@ from helpers.codes_helper import (
 
 @pytest.fixture(scope="module")
 def codes_api(authenticated_api_client: FineractApiClient) -> CodesEndpoint:
+    """Return the authenticated codes endpoint helper."""
     return authenticated_api_client.codes # type: ignore
 
 
@@ -90,6 +91,7 @@ def test_code_values_are_seeded(
     tested_code_name: str,
     code_values_file_name: str,
 ):
+    """Create or update expected code values and verify their database fields."""
     code_values = load_code_values(code_values_file_name)
 
     assert (

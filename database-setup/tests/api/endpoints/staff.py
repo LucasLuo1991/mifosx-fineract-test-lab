@@ -6,6 +6,8 @@ StaffStatus = Literal["active", "inactive"]
 
 
 class StaffPayload(TypedDict):
+    """Payload fields accepted by the Fineract staff API and DB assertions."""
+
     dateFormat: str
     emailAddress: str
     externalId: str
@@ -33,6 +35,7 @@ class StaffEndpoint(BaseEndpoint):
         loan_officers_only: bool | None = None,
         status: StaffStatus | None = None,
     ) -> list[Any]:
+        """Return staff from the Fineract API using optional filters."""
         return self._get(
             "/staff",
             expected_status,
@@ -47,6 +50,7 @@ class StaffEndpoint(BaseEndpoint):
     def create_staff(
         self, staff: StaffPayload, expected_status: int = 200
     ) -> dict[str, Any]:
+        """Create a Fineract staff member from a seed payload."""
         return self._post("/staff", self._staff_payload(staff), expected_status)
 
     def _list_staff_params(
@@ -56,6 +60,7 @@ class StaffEndpoint(BaseEndpoint):
         loan_officers_only: bool | None = None,
         status: StaffStatus | None = None,
     ) -> dict[str, Any]:
+        """Build query parameters for listing staff."""
 
         params: dict[str, Any] = {}
 
@@ -71,6 +76,7 @@ class StaffEndpoint(BaseEndpoint):
         return params
 
     def _staff_payload(self, staff: StaffPayload) -> dict[str, Any]:
+        """Remove test-only fields from a typed staff payload."""
         payload = dict(staff)
         payload.pop("display_name", None)  # Remove the display_name key as it's not part of the API payload
         return payload

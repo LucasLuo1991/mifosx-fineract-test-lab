@@ -7,10 +7,12 @@ from sqlalchemy.engine import Connection
 
 @pytest.fixture(scope="module")
 def staff_api(authenticated_api_client: FineractApiClient) -> StaffEndpoint:
+    """Return the authenticated staff endpoint helper."""
     return authenticated_api_client.staff  # type: ignore
 
 
 def test_staff_are_seeded(staff_api: StaffEndpoint, db_connection: Connection):
+    """Create missing staff members and verify their database fields."""
     staff = load_staff("staff.json")
 
     create_missing_staff(

@@ -8,11 +8,13 @@ from api.base_endpoint import BaseEndpoint
 
 
 def _attribute_name(endpoint_class_name: str) -> str:
+    """Convert an endpoint class name to the client attribute name."""
     name = endpoint_class_name.removesuffix("Endpoint")
     return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
 
 
 def _discover_endpoint_classes() -> Iterator[tuple[str, type[BaseEndpoint]]]:
+    """Discover endpoint classes exported by modules in this package."""
     for module_info in pkgutil.iter_modules(__path__):
         if module_info.name.startswith("_"):
             continue
@@ -34,6 +36,7 @@ for _, endpoint_class in _ENDPOINT_CLASSES:
 
 
 def endpoint_classes() -> Iterator[tuple[str, type[BaseEndpoint]]]:
+    """Return discovered endpoint attribute names and classes."""
     return iter(_ENDPOINT_CLASSES)
 
 

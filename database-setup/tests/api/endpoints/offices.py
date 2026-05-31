@@ -7,6 +7,8 @@ SortOrder = Literal["asc", "desc"]
 
 
 class OfficePayload(TypedDict):
+    """Payload fields accepted by the Fineract offices API."""
+
     name: str
     parentId: int
     openingDate: str
@@ -28,6 +30,7 @@ class OfficesEndpoint(BaseEndpoint):
         order_by: OfficeOrderBy | None = None,
         sort_order: SortOrder | None = None,
     ) -> list[Any]:
+        """Return offices from the Fineract API using optional filters."""
         return self._get(
             "/offices",
             expected_status,
@@ -41,6 +44,7 @@ class OfficesEndpoint(BaseEndpoint):
     def create_office(
         self, office: OfficePayload, expected_status: int = 200
     ) -> dict[str, Any]:
+        """Create a Fineract office from a seed payload."""
         return self._post("/offices", self._office_payload(office), expected_status)
 
     def _list_offices_params(
@@ -49,6 +53,7 @@ class OfficesEndpoint(BaseEndpoint):
         order_by: OfficeOrderBy | None = None,
         sort_order: SortOrder | None = None,
     ) -> dict[str, str]:
+        """Build query parameters for listing offices."""
 
         params: dict[str, str] = {}
 
@@ -62,4 +67,5 @@ class OfficesEndpoint(BaseEndpoint):
         return params
 
     def _office_payload(self, office: OfficePayload) -> dict[str, Any]:
+        """Convert a typed office payload to a mutable request body."""
         return dict(office)

@@ -74,6 +74,7 @@ SAVINGS_PRODUCTS_FIELD_MAPPINGS = (
 
 
 def load_savings_products(file_name: str) -> list[SavingsProductPayload]:
+    """Load savings product seed payloads from the shared test data directory."""
     return cast(
         list[SavingsProductPayload],
         load_seed_data(SAVINGS_PRODUCTS_DATA_DIR, file_name),
@@ -81,11 +82,13 @@ def load_savings_products(file_name: str) -> list[SavingsProductPayload]:
 
 
 def get_savings_products_names(db_connection: Connection) -> set[str]:
+    """Return the names of savings products currently stored in Fineract."""
     result = db_connection.execute(SAVINGS_PRODUCTS_NAMES_QUERY)
     return set(result.scalars())
 
 
 def get_savings_products_rows(db_connection: Connection):
+    """Return savings product rows needed for seed verification."""
     result = db_connection.execute(SAVINGS_PRODUCTS_ROWS_QUERY)
     return result.mappings().all()
 
@@ -95,6 +98,7 @@ def create_missing_savings_products(
     db_connection: Connection,
     savings_products: list[SavingsProductPayload],
 ) -> None:
+    """Create savings products that are not already present by name."""
     existing_savings_products = get_savings_products_names(db_connection)
 
     create_missing_items(
@@ -108,6 +112,7 @@ def assert_savings_products_present(
     db_connection: Connection,
     savings_products: list[SavingsProductPayload],
 ) -> None:
+    """Assert that savings product seed payloads match database rows."""
     assert_seed_items_match_db(
         expected_items=savings_products,
         actual_rows=get_savings_products_rows(db_connection),

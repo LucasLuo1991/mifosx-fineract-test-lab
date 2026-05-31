@@ -10,6 +10,7 @@ def wait_for_health_check(
     delay_seconds: int = 30,
     timeout_seconds: int = 5,
 ) -> None:
+    """Poll a health endpoint until it reports UP or the retry budget expires."""
     for attempt in range(max_attempts):
         try:
             response = requests.get(health_url, timeout=timeout_seconds)
@@ -25,6 +26,7 @@ def wait_for_health_check(
 
 
 def _is_healthy_response(response: requests.Response) -> bool:
+    """Return whether a response is a successful Fineract health payload."""
     if response.status_code != 200:
         return False
 

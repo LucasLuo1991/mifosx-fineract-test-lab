@@ -6,6 +6,8 @@ Number = int | float
 
 
 class ChargePayload(TypedDict):
+    """Payload fields accepted by the Fineract charges API for these tests."""
+
     active: bool
     amount: Number
     chargeAppliesTo: int
@@ -40,6 +42,7 @@ class ChargesEndpoint(BaseEndpoint):
         self,
         expected_status: int = 200,
     ) -> list[Any]:
+        """Return charges from the Fineract API."""
         return self._get(
             "/charges",
             expected_status,
@@ -48,7 +51,9 @@ class ChargesEndpoint(BaseEndpoint):
     def create_charge(
         self, charge: ChargePayload, expected_status: int = 200
     ) -> dict[str, Any]:
+        """Create a Fineract charge from a seed payload."""
         return self._post("/charges", self._charge_payload(charge), expected_status)
 
     def _charge_payload(self, charge: ChargePayload) -> dict[str, Any]:
+        """Convert a typed charge payload to a mutable request body."""
         return dict(charge)

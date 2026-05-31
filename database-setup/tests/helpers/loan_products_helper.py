@@ -95,6 +95,7 @@ LOAN_PRODUCTS_FIELD_MAPPINGS = (
 
 
 def load_loan_products(file_name: str) -> list[LoanProductPayload]:
+    """Load loan product seed payloads from the shared test data directory."""
     return cast(
         list[LoanProductPayload],
         load_seed_data(LOAN_PRODUCTS_DATA_DIR, file_name),
@@ -102,11 +103,13 @@ def load_loan_products(file_name: str) -> list[LoanProductPayload]:
 
 
 def get_loan_products_names(db_connection: Connection) -> set[str]:
+    """Return the names of loan products currently stored in Fineract."""
     result = db_connection.execute(LOAN_PRODUCTS_NAMES_QUERY)
     return set(result.scalars())
 
 
 def get_loan_products_rows(db_connection: Connection):
+    """Return loan product rows needed for seed verification."""
     result = db_connection.execute(LOAN_PRODUCTS_ROWS_QUERY)
     return result.mappings().all()
 
@@ -116,6 +119,7 @@ def create_missing_loan_products(
     db_connection: Connection,
     loan_products: list[LoanProductPayload],
 ) -> None:
+    """Create loan products that are not already present by name."""
     existing_loan_products = get_loan_products_names(db_connection)
 
     create_missing_items(
@@ -129,6 +133,7 @@ def assert_loan_products_present(
     db_connection: Connection,
     loan_products: list[LoanProductPayload],
 ) -> None:
+    """Assert that loan product seed payloads match database rows."""
     assert_seed_items_match_db(
         expected_items=loan_products,
         actual_rows=get_loan_products_rows(db_connection),

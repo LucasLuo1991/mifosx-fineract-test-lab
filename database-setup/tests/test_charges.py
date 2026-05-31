@@ -11,10 +11,12 @@ from sqlalchemy.engine import Connection
 
 @pytest.fixture(scope="module")
 def charges_api(authenticated_api_client: FineractApiClient) -> ChargesEndpoint:
+    """Return the authenticated charges endpoint helper."""
     return authenticated_api_client.charges  # type: ignore
 
 
 def test_charges_are_seeded(charges_api: ChargesEndpoint, db_connection: Connection):
+    """Create missing charges and verify their database fields."""
     charges = load_charges("charges.json")
 
     create_missing_charges(

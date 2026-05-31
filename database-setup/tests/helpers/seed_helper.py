@@ -15,12 +15,15 @@ _SeedItemT = TypeVar("_SeedItemT", bound=Mapping[str, Any])
 
 @dataclass(frozen=True)
 class SeedFieldMapping:
+    """Mapping from a seed JSON field to the column used to verify it in SQL."""
+
     json_key: str
     db_column: str
     normalizer: Normalizer | None = None
 
 
 def load_seed_data(data_dir: Path, file_name: str) -> list[SeedItem]:
+    """Load a seed JSON file from a test data directory."""
     return cast(list[SeedItem], load_json(data_dir / file_name))
 
 
@@ -30,6 +33,7 @@ def create_missing_items(
     create_item: Callable[[_SeedItemT], object],
     name_key: str = "name",
 ) -> None:
+    """Create seed items whose identity value is not already in the database."""
     for item in items:
         item_name = str(item[name_key])
 
@@ -43,6 +47,7 @@ def assert_items_present(
     actual_names: set[str],
     label: str,
 ) -> None:
+    """Assert that all expected names are present in a set of actual names."""
     missing_names = expected_names - actual_names
 
     assert not missing_names, (
@@ -52,6 +57,7 @@ def assert_items_present(
 
 
 def normalize_decimal(value: Any, _: SeedItem) -> Decimal | None:
+    """Convert a JSON numeric value to Decimal while preserving nulls."""
     if value is None:
         return None
 
@@ -59,6 +65,7 @@ def normalize_decimal(value: Any, _: SeedItem) -> Decimal | None:
 
 
 def normalize_optional_int(value: Any, _: SeedItem) -> int | None:
+    """Convert an optional JSON value to int while preserving nulls."""
     if value is None:
         return None
 
@@ -66,6 +73,7 @@ def normalize_optional_int(value: Any, _: SeedItem) -> int | None:
 
 
 def normalize_optional_zero_decimal(value: Any, _: SeedItem) -> Decimal | None:
+    """Convert JSON zero and null values to None, otherwise to Decimal."""
     if value is None or Decimal(str(value)) == Decimal("0"):
         return None
 
@@ -73,6 +81,7 @@ def normalize_optional_zero_decimal(value: Any, _: SeedItem) -> Decimal | None:
 
 
 def normalize_seed_date(value: Any, item: SeedItem) -> date | None:
+    """Parse a seeded date using the item's Fineract-style dateFormat field."""
     if value is None:
         return None
 
@@ -81,11 +90,13 @@ def normalize_seed_date(value: Any, item: SeedItem) -> date | None:
 
 
 def normalize_fee_month_day_day(value: Any, item: SeedItem) -> int | None:
+    """Extract the day number from a seeded month-day fee value."""
     parsed_date = _normalize_month_day(value, item)
     return parsed_date.day if parsed_date is not None else None
 
 
 def normalize_fee_month_day_month(value: Any, item: SeedItem) -> int | None:
+    """Extract the month number from a seeded month-day fee value."""
     parsed_date = _normalize_month_day(value, item)
     return parsed_date.month if parsed_date is not None else None
 
@@ -98,6 +109,7 @@ def assert_seed_items_match_db(
     identity_db_column: str | None = None,
     field_mappings: Iterable[SeedFieldMapping] = (),
 ) -> None:
+    """Assert that seeded items exist in the database with matching fields."""
     identity_column = identity_db_column or identity_json_key
     expected_by_identity = {
         str(item[identity_json_key]): item for item in expected_items
@@ -136,6 +148,7 @@ def assert_seed_items_match_db(
 
 
 def _normalize_db_value(value: Any) -> Any:
+    """Normalize database values before comparing them to JSON seed values."""
     if isinstance(value, Decimal):
         return value.normalize()
 
@@ -143,6 +156,7 @@ def _normalize_db_value(value: Any) -> Any:
 
 
 def _normalize_month_day(value: Any, item: SeedItem) -> date | None:
+    """Parse a month-day value using the item's monthDayFormat field."""
     if value is None:
         return None
 
@@ -154,6 +168,7 @@ def _normalize_month_day(value: Any, item: SeedItem) -> date | None:
 
 
 def _python_date_format(date_format: str) -> str:
+    """Translate Fineract date format tokens to Python strptime tokens."""
     return (
         date_format.replace("yyyy", "%Y")
         .replace("MMMM", "%B")

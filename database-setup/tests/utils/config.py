@@ -6,6 +6,8 @@ from utils.urls import build_fineract_api_base_url, derive_server_url_from_api_b
 
 @dataclass
 class FineractTestConfig:
+    """Runtime configuration for database and Fineract API test access."""
+
     db_username: str
     db_password: str
     db_endpoint: str
@@ -17,6 +19,7 @@ class FineractTestConfig:
 
 
 def load_config_from_env() -> FineractTestConfig:
+    """Build test configuration from environment variables and local defaults."""
     explicit_api_base_url = os.getenv("API_BASE_URL")
     explicit_server_url = os.getenv("SERVER_URL")
 
