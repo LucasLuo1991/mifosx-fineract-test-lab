@@ -60,6 +60,8 @@ nosetests.xml
 coverage.xml
 *.cover
 *.py,cover
+.mypy_cache/
+pytest-cache-files-*/
 
 # Jupyter Notebooks Cache
 .ipynb_checkpoints
@@ -70,8 +72,8 @@ Thumbs.db
 
 # Playwright
 node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+playwright/.auth/
