@@ -50,3 +50,14 @@ class BaseEndpoint:
             return None
 
         return response.json()
+
+    def _put(
+        self,
+        endpoint: str,
+        json_body: dict[str, Any],
+        expected_status: int = 200,
+        **kwargs: Any,
+    ) -> Any:
+        return self._request(
+            "PUT", endpoint, expected_status, json=json_body, **kwargs
+        ).json()

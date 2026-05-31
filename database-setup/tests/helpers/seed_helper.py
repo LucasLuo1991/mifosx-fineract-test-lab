@@ -1,24 +1,37 @@
 from collections.abc import Callable, Iterable, Mapping
+from dataclasses import dataclass
+from datetime import date, datetime
+from decimal import Decimal
 from pathlib import Path
-from typing import Any, TypeVar, cast
+from typing import Any, TypeAlias, TypeVar, cast
 
+from sqlalchemy.engine import RowMapping
 from utils.json_loader import load_json
 
-SeedItem = TypeVar("SeedItem", bound=Mapping[str, Any])
+SeedItem: TypeAlias = Mapping[str, Any]
+Normalizer: TypeAlias = Callable[[Any, SeedItem], Any]
+_SeedItemT = TypeVar("_SeedItemT", bound=Mapping[str, Any])
 
 
-def load_seed_data(data_dir: Path, file_name: str) -> list[SeedItem]: # type: ignore
+@dataclass(frozen=True)
+class SeedFieldMapping:
+    json_key: str
+    db_column: str
+    normalizer: Normalizer | None = None
+
+
+def load_seed_data(data_dir: Path, file_name: str) -> list[SeedItem]:
     return cast(list[SeedItem], load_json(data_dir / file_name))
 
 
 def create_missing_items(
-    items: Iterable[SeedItem],
+    items: Iterable[_SeedItemT],
     existing_names: set[str],
-    create_item: Callable[[SeedItem], object],
+    create_item: Callable[[_SeedItemT], object],
     name_key: str = "name",
 ) -> None:
     for item in items:
-        item_name = item[name_key]
+        item_name = str(item[name_key])
 
         if item_name not in existing_names:
             create_item(item)
@@ -35,4 +48,115 @@ def assert_items_present(
     assert not missing_names, (
         f"Missing {label}: {sorted(missing_names)}. "
         f"Actual values: {sorted(actual_names)}"
+    )
+
+
+def normalize_decimal(value: Any, _: SeedItem) -> Decimal | None:
+    if value is None:
+        return None
+
+    return Decimal(str(value))
+
+
+def normalize_optional_int(value: Any, _: SeedItem) -> int | None:
+    if value is None:
+        return None
+
+    return int(value)
+
+
+def normalize_optional_zero_decimal(value: Any, _: SeedItem) -> Decimal | None:
+    if value is None or Decimal(str(value)) == Decimal("0"):
+        return None
+
+    return Decimal(str(value))
+
+
+def normalize_seed_date(value: Any, item: SeedItem) -> date | None:
+    if value is None:
+        return None
+
+    date_format = item["dateFormat"]
+    return datetime.strptime(str(value), _python_date_format(str(date_format))).date()
+
+
+def normalize_fee_month_day_day(value: Any, item: SeedItem) -> int | None:
+    parsed_date = _normalize_month_day(value, item)
+    return parsed_date.day if parsed_date is not None else None
+
+
+def normalize_fee_month_day_month(value: Any, item: SeedItem) -> int | None:
+    parsed_date = _normalize_month_day(value, item)
+    return parsed_date.month if parsed_date is not None else None
+
+
+def assert_seed_items_match_db(
+    expected_items: Iterable[SeedItem],
+    actual_rows: Iterable[RowMapping],
+    label: str,
+    identity_json_key: str = "name",
+    identity_db_column: str | None = None,
+    field_mappings: Iterable[SeedFieldMapping] = (),
+) -> None:
+    identity_column = identity_db_column or identity_json_key
+    expected_by_identity = {
+        str(item[identity_json_key]): item for item in expected_items
+    }
+    actual_by_identity = {str(row[identity_column]): row for row in actual_rows}
+
+    assert_items_present(
+        expected_names=set(expected_by_identity),
+        actual_names=set(actual_by_identity),
+        label=label,
+    )
+
+    mismatches: list[str] = []
+
+    for identity, expected_item in expected_by_identity.items():
+        actual_row = actual_by_identity[identity]
+
+        for field_mapping in field_mappings:
+            if field_mapping.json_key not in expected_item:
+                expected_value = None
+            else:
+                expected_value = expected_item[field_mapping.json_key]
+
+            if field_mapping.normalizer is not None:
+                expected_value = field_mapping.normalizer(expected_value, expected_item)
+
+            actual_value = _normalize_db_value(actual_row[field_mapping.db_column])
+
+            if actual_value != expected_value:
+                mismatches.append(
+                    f"{label} '{identity}' field '{field_mapping.json_key}' "
+                    f"expected {expected_value!r}, actual {actual_value!r}"
+                )
+
+    assert not mismatches, "Seed field mismatches:\n" + "\n".join(mismatches)
+
+
+def _normalize_db_value(value: Any) -> Any:
+    if isinstance(value, Decimal):
+        return value.normalize()
+
+    return value
+
+
+def _normalize_month_day(value: Any, item: SeedItem) -> date | None:
+    if value is None:
+        return None
+
+    month_day_format = str(item["monthDayFormat"])
+    return datetime.strptime(
+        f"{value} 2000",
+        f"{_python_date_format(month_day_format)} %Y",
+    ).date()
+
+
+def _python_date_format(date_format: str) -> str:
+    return (
+        date_format.replace("yyyy", "%Y")
+        .replace("MMMM", "%B")
+        .replace("MMM", "%b")
+        .replace("dd", "%d")
     )

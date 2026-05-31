@@ -47,5 +47,18 @@ class CodesEndpoint(BaseEndpoint):
             expected_status,
         )
 
+    def update_code_values_by_name(
+        self,
+        code_name: str,
+        code_value_id: int,
+        code_value: CodeValuePayload,
+        expected_status: int = 200,
+    ) -> dict[str, Any]:
+        return self._put(
+            f"/codes/name/{code_name}/codevalues/{code_value_id}",
+            self._code_value_payload(code_value),
+            expected_status,
+        )
+
     def _code_value_payload(self, code_value: CodeValuePayload) -> dict[str, Any]:
         return dict(code_value)
