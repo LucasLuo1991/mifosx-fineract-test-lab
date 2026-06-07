@@ -112,6 +112,27 @@ services:
       - FINERACT_HIKARI_USERNAME=${FINERACT_DB_USER:-postgres}
       - FINERACT_HIKARI_PASSWORD=${FINERACT_DB_PASS:-your_secure_password_here}
       - FINERACT_MESSAGING_ACTIVEMQ_BROKER_URL=${FINERACT_MESSAGING_ACTIVEMQ_BROKER_URL:-tcp://activemq:61616}
+  # Test runner service for pytest, Newman, and Playwright commands
+  test-runner:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - SERVER_URL=http://fineract-server:8080
+      - DEFAULT_DB_ENDPOINT=postgresql:5432/fineract_default
+      - FINERACT_DB_USER=${FINERACT_DB_USER:-postgres}
+      - FINERACT_DB_PASS=${FINERACT_DB_PASS:-your_secure_password_here}
+      - TENANT_ID=default
+    depends_on:
+      web-app:
+        condition: service_started
+      postgresql:
+        condition: service_healthy
+      activemq:
+        condition: service_healthy
+      fineract-server:
+        condition: service_healthy
 
 volumes:
   fineract-postgresql-data:
