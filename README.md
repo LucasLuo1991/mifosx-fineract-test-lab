@@ -28,7 +28,7 @@ Thanks to the Mifos and OpenMF projects for the upstream `mifosx-platform` work 
 Start the stack from `mifosx-platform/`:
 
 ```powershell
-docker compose up -d
+docker compose --env-file ..\.env up -d
 ```
 
 Stop the stack:
@@ -47,7 +47,11 @@ Default host URLs:
 | Fineract health | `http://localhost:3000/fineract-provider/actuator/health` |
 | PostgreSQL | `localhost:5432` |
 
-Check `mifosx-platform/fineract-db/docker/postgresql.env` before changing tests that depend on database names, tenant names, credentials, or ports.
+Use the root `.env.example` as the template for local or Jenkins-specific values shared by Docker Compose, pytest, Playwright, and Newman. When starting Compose from `mifosx-platform/`, pass the root env file with `docker compose --env-file ..\.env up -d`.
+
+The host-facing URLs default to the configured ports. Set `SERVER_URL`, `WEB_APP_URL`, or `DB_ENDPOINT` only when a test needs a full URL/endpoint override.
+
+`WEB_APP_FINERACT_API_URL` is injected into the web app and is used by the browser. By default it is derived from `FINERACT_PORT`. Override it with `http://fineract-server:8080` when running Playwright inside the Compose `test-runner` container.
 
 ## Python Database Tests
 
@@ -68,14 +72,19 @@ The tests read configuration from environment variables when present, otherwise 
 
 | Variable | Default |
 | --- | --- |
-| `SERVER_URL` | `http://localhost:3000` |
+| `FINERACT_PORT` | `3000` |
+| `WEB_APP_PORT` | `4200` |
+| `POSTGRES_PORT` | `5432` |
+| `SERVER_URL` | built from `FINERACT_PORT` |
+| `WEB_APP_URL` | built from `WEB_APP_PORT` |
+| `WEB_APP_FINERACT_API_URL` | built from `FINERACT_PORT` |
 | `API_BASE_URL` | built from `SERVER_URL` |
 | `API_USER` | `mifos` |
 | `API_PASS` | `password` |
 | `TENANT_ID` | `default` |
 | `FINERACT_DB_USER` | `postgres` |
 | `FINERACT_DB_PASS` | `your_secure_password_here` |
-| `DEFAULT_DB_ENDPOINT` | `localhost:5432/fineract_default` |
+| `DB_ENDPOINT` | built from `POSTGRES_PORT` and `FINERACT_TENANT_DEFAULT_DB_NAME` |
 
 ## UI Tests
 

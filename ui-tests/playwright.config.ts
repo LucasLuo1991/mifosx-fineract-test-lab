@@ -1,13 +1,19 @@
 import { defineConfig, devices } from '@playwright/test';
 import process from 'process';
+import { fileURLToPath } from 'url';
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+import dotenv from 'dotenv';
+import path from 'path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+dotenv.config({ path: path.resolve(__dirname, '../.env'), quiet: true });
+
+const webAppUrl = process.env.WEB_APP_URL || `http://localhost:${process.env.WEB_APP_PORT || '4200'}`;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -27,7 +33,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: webAppUrl,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',

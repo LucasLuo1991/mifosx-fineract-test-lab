@@ -40,7 +40,8 @@ By default, the checked-in environment maps services to these host URLs:
 - Fineract API: `http://localhost:3000`
 - PostgreSQL: `localhost:5432`
 
-Check `mifosx-platform/fineract-db/docker/postgresql.env` before changing tests that depend on ports, credentials, tenant names, or database names.
+Check the root `.env.example` before changing tests that depend on ports, credentials, tenant names, or database names.
+Host-facing test URLs are derived from the port variables by default. Set `WEB_APP_FINERACT_API_URL=http://fineract-server:8080` when the browser runs inside the Compose `test-runner` container.
 
 ## Test Commands
 
