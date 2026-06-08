@@ -2,6 +2,7 @@ pipeline {
   agent any
 
   environment {
+    COMPOSE_PROFILES = 'test'
     WEB_APP_FINERACT_API_URL = 'http://fineract-server:8080'
   }
 
@@ -15,7 +16,7 @@ pipeline {
       steps {
         dir('mifosx-platform') {
           sh '''
-            docker compose up -d --build
+            docker compose up -d --build test-runner
           '''
         }
       }
