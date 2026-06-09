@@ -1,0 +1,1 @@
+export const authStorageStateFile = 'playwright/.auth/user.json';
