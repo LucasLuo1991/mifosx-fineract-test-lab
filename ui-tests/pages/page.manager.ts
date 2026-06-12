@@ -1,4 +1,5 @@
 import type { Page } from '@playwright/test';
+import { HomePage } from './home.page.js';
 import { LoginPage } from './login.page.js';
 
 export class PageManager {
@@ -8,6 +9,10 @@ export class PageManager {
 
   get login(): LoginPage {
     return this.get('login', () => new LoginPage(this.page));
+  }
+
+  get home(): HomePage {
+    return this.get('home', () => new HomePage(this.page));
   }
 
   private get<T>(name: string, createPage: () => T): T {

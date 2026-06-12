@@ -1,15 +1,22 @@
-import type { Page } from '@playwright/test';
+import type { Locator, Page } from '@playwright/test';
+import { routes } from '../support/routes.js';
+import { BasePage } from './base.page.js';
 
-export class LoginPage {
-  constructor(private readonly page: Page) { }
+export class LoginPage extends BasePage {
+  private readonly usernameInput: Locator;
+  private readonly passwordInput: Locator;
+  private readonly loginButton: Locator;
 
-  async goto() {
-    await this.page.goto('/#/login');
+  constructor(page: Page) {
+    super(page, routes.login);
+    this.usernameInput = this.page.getByLabel('Username');
+    this.passwordInput = this.page.getByLabel('Password');
+    this.loginButton = this.page.getByRole('button', { name: 'Login' });
   }
 
   async login(username: string, password: string) {
-    await this.page.getByLabel('Username').fill(username);
-    await this.page.getByLabel('Password').fill(password);
-    await this.page.locator('.m3-button-container--full-width').click();
+    await this.usernameInput.fill(username);
+    await this.passwordInput.fill(password);
+    await this.loginButton.click();
   }
 }
