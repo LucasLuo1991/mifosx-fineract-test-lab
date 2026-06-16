@@ -25,7 +25,7 @@ setup('create authenticated storage state', async ({ browser, page, pageManager 
       await addAuthSessionStorage(testContext);
       const testPage = await testContext.newPage();
       await testPage.goto(routes.home);
-      await expect(testPage).not.toHaveURL(routes.login);
+      await expect(testPage).toHaveURL(routes.home);
 
     } finally {
       await testContext.close();
