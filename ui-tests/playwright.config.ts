@@ -20,6 +20,7 @@ const webAppBaseUrl = process.env.WEB_APP_URL || `http://localhost:${process.env
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  globalSetup: './setup/global-setup.ts',
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
