@@ -88,8 +88,24 @@ pipeline {
       }
     }
 
-    stage('Archive HTML Reports') {
+    stage('Publish HTML Reports') {
       steps {
+        publishHTML([
+          allowMissing: true,
+          alwaysLinkToLastBuild: true,
+          keepAll: true,
+          reportDir: 'test-results',
+          reportFiles: 'newman-report.html',
+          reportName: 'Newman API Report'
+        ])
+        publishHTML([
+          allowMissing: true,
+          alwaysLinkToLastBuild: true,
+          keepAll: true,
+          reportDir: 'test-results/playwright-report',
+          reportFiles: 'index.html',
+          reportName: 'Playwright UI Report'
+        ])
         archiveArtifacts allowEmptyArchive: true, artifacts: 'test-results/newman-report.html,test-results/playwright-report/**', fingerprint: true
       }
     }
