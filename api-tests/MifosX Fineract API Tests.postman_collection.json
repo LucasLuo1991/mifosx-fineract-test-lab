@@ -1,0 +1,134 @@
+{
+  "info": {
+    "_postman_id": "132b3431-96a7-4a69-89d3-8b30a3a27283",
+    "name": "MifosX Fineract API Tests",
+    "description": "Postman collection for testing MifosX Fineract APIs in the sandbox environment.\n\nAPI documentation:  \n[https://sandbox.mifos.community/fineract-provider/swagger-ui/index.html](https://sandbox.mifos.community/fineract-provider/swagger-ui/index.html)\n\nThis collection supports functional, integration, and regression testing of key Fineract endpoints. It uses collection variables for environment-specific configuration, including baseUrl, username, password, tenantId, and tenantKey.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32238981"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "let responseJson;\r",
+              "pm.test(\"Response body is valid JSON\", function () {\r",
+              "    responseJson = pm.response.json();\r",
+              "    pm.expect(responseJson).to.be.an(\"object\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Authentication succeeded\", function () {\r",
+              "    pm.expect(responseJson.authenticated).to.be.true;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response contains username\", function () {\r",
+              "    pm.expect(responseJson.username).to.be.a(\"string\").and.not.empty;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response username matches request username\", function () {\r",
+              "    pm.expect(responseJson.username).to.eql(String(pm.variables.get(\"username\")).replace(/^\"|\"$/g, \"\"));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response contains authentication token\", function () {\r",
+              "    pm.expect(responseJson.base64EncodedAuthenticationKey).to.be.a(\"string\").and.not.empty;\r",
+              "});\r",
+              "\r",
+              "if (responseJson && responseJson.base64EncodedAuthenticationKey) {\r",
+              "    pm.collectionVariables.set(\"accessToken\", responseJson.base64EncodedAuthenticationKey);\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "{{tenantKey}}",
+            "value": "{{tenantId}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/authentication",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "authentication"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/fineract-provider/api/v1"
+    },
+    {
+      "key": "username",
+      "value": "mifos"
+    },
+    {
+      "key": "password",
+      "value": "password"
+    },
+    {
+      "key": "tenantId",
+      "value": "default"
+    },
+    {
+      "key": "tenantKey",
+      "value": "fineract-platform-tenantid"
+    },
+    {
+      "key": "accessToken",
+      "value": ""
+    }
+  ]
+}

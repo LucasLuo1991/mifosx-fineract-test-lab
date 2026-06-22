@@ -14,6 +14,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 dotenv.config({ path: path.resolve(__dirname, '../.env'), quiet: true });
 
+const isCI = !!process.env.CI;
 const webAppBaseUrl = process.env.WEB_APP_URL || `http://localhost:${process.env.WEB_APP_PORT || '4200'}`;
 
 /**
@@ -25,13 +26,18 @@ export default defineConfig({
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
+  forbidOnly: isCI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: isCI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: isCI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: isCI
+    ? [
+        ['junit', { outputFile: 'test-results/playwright-results.xml' }],
+        ['html', { outputFolder: 'playwright-report', open: 'never' }],
+      ]
+    : 'html',
   timeout: 30 * 1000,
   expect: {
     timeout: 5000,
