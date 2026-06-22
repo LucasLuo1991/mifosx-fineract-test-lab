@@ -7,7 +7,7 @@ pipeline {
   }
 
   options {
-    ansiColor('xterm')
+    wrap([$class: 'AnsiColorBuildWrapper', colorMapName: 'xterm'])
     timestamps()
   }
 
