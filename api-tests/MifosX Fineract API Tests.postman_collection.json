@@ -592,13 +592,6 @@
             "packages": {},
             "requests": {}
           }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "packages": {},
-            "type": "text/javascript"
-          }
         }
       ],
       "request": {
@@ -633,30 +626,6 @@
         }
       },
       "response": []
-    }
-  ],
-  "event": [
-    {
-      "listen": "prerequest",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
-        "exec": [
-          ""
-        ]
-      }
-    },
-    {
-      "listen": "test",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
-        "exec": [
-          ""
-        ]
-      }
     }
   ],
   "variable": [
