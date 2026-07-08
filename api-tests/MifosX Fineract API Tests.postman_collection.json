@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "132b3431-96a7-4a69-89d3-8b30a3a27283",
+    "_postman_id": "51e60ac8-ddb7-4d99-8970-33e7be638915",
     "name": "MifosX Fineract API Tests",
     "description": "Postman collection for testing MifosX Fineract APIs in the sandbox environment.\n\nAPI documentation:  \n[https://sandbox.mifos.community/fineract-provider/swagger-ui/index.html](https://sandbox.mifos.community/fineract-provider/swagger-ui/index.html)\n\nThis collection supports functional, integration, and regression testing of key Fineract endpoints. It uses collection variables for environment-specific configuration, including baseUrl, username, password, tenantId, and tenantKey.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -8,40 +8,40 @@
   },
   "item": [
     {
-      "name": "Authentication",
+      "name": "Authenticate user",
       "event": [
         {
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
+              "pm.test(\"returns HTTP 200\", function () {\r",
               "    pm.response.to.have.status(200);\r",
               "});\r",
               "\r",
-              "let responseJson;\r",
-              "pm.test(\"Response body is valid JSON\", function () {\r",
-              "    responseJson = pm.response.json();\r",
-              "    pm.expect(responseJson).to.be.an(\"object\");\r",
+              "let authResponse;\r",
+              "pm.test(\"Response body is a valid JSON object\", function () {\r",
+              "    authResponse = pm.response.json();\r",
+              "    pm.expect(authResponse).to.be.an(\"object\");\r",
               "});\r",
               "\r",
-              "pm.test(\"Authentication succeeded\", function () {\r",
-              "    pm.expect(responseJson.authenticated).to.be.true;\r",
+              "pm.test(\"Authenticates the requested user\", function () {\r",
+              "    pm.expect(authResponse.authenticated).to.be.true;\r",
               "});\r",
               "\r",
-              "pm.test(\"Response contains username\", function () {\r",
-              "    pm.expect(responseJson.username).to.be.a(\"string\").and.not.empty;\r",
+              "pm.test(\"Authentication response includes username\", function () {\r",
+              "    pm.expect(authResponse.username).to.be.a(\"string\").and.not.empty;\r",
               "});\r",
               "\r",
-              "pm.test(\"Response username matches request username\", function () {\r",
-              "    pm.expect(responseJson.username).to.eql(String(pm.variables.get(\"username\")).replace(/^\"|\"$/g, \"\"));\r",
+              "pm.test(\"Authentication response username matches request username\", function () {\r",
+              "    pm.expect(authResponse.username).to.eql(String(pm.variables.get(\"username\")).replace(/^\"|\"$/g, \"\"));\r",
               "});\r",
               "\r",
-              "pm.test(\"Response contains authentication token\", function () {\r",
-              "    pm.expect(responseJson.base64EncodedAuthenticationKey).to.be.a(\"string\").and.not.empty;\r",
+              "pm.test(\"Authentication response includes access token\", function () {\r",
+              "    pm.expect(authResponse.base64EncodedAuthenticationKey).to.be.a(\"string\").and.not.empty;\r",
               "});\r",
               "\r",
-              "if (responseJson && responseJson.base64EncodedAuthenticationKey) {\r",
-              "    pm.collectionVariables.set(\"accessToken\", responseJson.base64EncodedAuthenticationKey);\r",
+              "if (authResponse && authResponse.base64EncodedAuthenticationKey) {\r",
+              "    pm.collectionVariables.set(\"accessToken\", authResponse.base64EncodedAuthenticationKey);\r",
               "}"
             ],
             "type": "text/javascript",
@@ -56,6 +56,11 @@
           {
             "key": "{{tenantKey}}",
             "value": "{{tenantId}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
             "type": "text"
           }
         ],
@@ -75,6 +80,555 @@
           ],
           "path": [
             "authentication"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List gender code values",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let genderCodeValues;",
+              "",
+              "pm.test(\"returns HTTP 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response body is valid JSON\", function () {",
+              "    genderCodeValues = pm.response.json();",
+              "    pm.expect(genderCodeValues).to.exist;",
+              "});",
+              "",
+              "pm.test(\"Response contains gender code values\", function () {",
+              "    pm.expect(genderCodeValues).to.be.an(\"array\");",
+              "});",
+              "",
+              "pm.test(\"Gender code values include ID and name\", function () {",
+              "    genderCodeValues.forEach(function (genderCodeValue) {",
+              "        pm.expect(genderCodeValue).to.be.an(\"object\");",
+              "        pm.expect(genderCodeValue).to.have.property(\"id\");",
+              "        pm.expect(genderCodeValue).to.have.property(\"name\");",
+              "    });",
+              "});",
+              "",
+              "const genderIdNameMap = {};",
+              "",
+              "if (Array.isArray(genderCodeValues)) {",
+              "    genderCodeValues.forEach(function (genderCodeValue) {",
+              "        if (genderCodeValue && genderCodeValue.id !== undefined && genderCodeValue.name !== undefined) {",
+              "            genderIdNameMap[genderCodeValue.id] = genderCodeValue.name;",
+              "        }",
+              "    });",
+              "}",
+              "",
+              "pm.collectionVariables.set(\"genderIdNameMap\", JSON.stringify(genderIdNameMap));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "basic {{accessToken}}",
+            "type": "text"
+          },
+          {
+            "key": "{{tenantKey}}",
+            "value": "{{tenantId}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/codes/name/:codeName/codevalues",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "codes",
+            "name",
+            ":codeName",
+            "codevalues"
+          ],
+          "variable": [
+            {
+              "key": "codeName",
+              "value": "Gender"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List active staff",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let staffMembers;\r",
+              "\r",
+              "pm.test(\"returns HTTP 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body is valid JSON\", function () {\r",
+              "    staffMembers = pm.response.json();\r",
+              "    pm.expect(staffMembers).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response contains active staff members\", function () {\r",
+              "    pm.expect(staffMembers).to.be.an(\"array\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Staff members include ID and display name\", function () {\r",
+              "    staffMembers.forEach(function (staffMember) {\r",
+              "        pm.expect(staffMember).to.be.an(\"object\");\r",
+              "        pm.expect(staffMember).to.have.property(\"id\");\r",
+              "        pm.expect(staffMember).to.have.property(\"displayName\");\r",
+              "    });\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Every listed staff member is active\", function () {\r",
+              "    staffMembers.forEach(function (staffMember) {\r",
+              "        pm.expect(staffMember).to.have.property(\"isActive\");\r",
+              "        pm.expect(staffMember.isActive).to.eql(true);\r",
+              "    });\r",
+              "});\r",
+              "\r",
+              "const staffIdDisplayNameMap = {};\r",
+              "\r",
+              "if (Array.isArray(staffMembers)) {\r",
+              "    staffMembers.forEach(function (staffMember) {\r",
+              "        if (staffMember && staffMember.id !== undefined && staffMember.displayName !== undefined) {\r",
+              "            staffIdDisplayNameMap[staffMember.id] = staffMember.displayName;\r",
+              "        }\r",
+              "    });\r",
+              "}\r",
+              "\r",
+              "pm.collectionVariables.set(\"staffIdDisplayNameMap\", JSON.stringify(staffIdDisplayNameMap));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "basic {{accessToken}}",
+            "type": "text"
+          },
+          {
+            "key": "{{tenantKey}}",
+            "value": "{{tenantId}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/staff?status=ACTIVE",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "staff"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "ACTIVE"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List offices",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let officeRecords;",
+              "",
+              "pm.test(\"returns HTTP 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response body is valid JSON\", function () {",
+              "    officeRecords = pm.response.json();",
+              "    pm.expect(officeRecords).to.exist;",
+              "});",
+              "",
+              "pm.test(\"Response contains office records\", function () {",
+              "    pm.expect(officeRecords).to.be.an(\"array\");",
+              "});",
+              "",
+              "pm.test(\"Office records include ID and name\", function () {",
+              "    officeRecords.forEach(function (officeRecord) {",
+              "        pm.expect(officeRecord).to.be.an(\"object\");",
+              "        pm.expect(officeRecord).to.have.property(\"id\");",
+              "        pm.expect(officeRecord).to.have.property(\"name\");",
+              "    });",
+              "});",
+              "",
+              "const officeIdNameMap = {};",
+              "",
+              "if (Array.isArray(officeRecords)) {",
+              "    officeRecords.forEach(function (officeRecord) {",
+              "        if (officeRecord && officeRecord.id !== undefined && officeRecord.name !== undefined) {",
+              "            officeIdNameMap[officeRecord.id] = officeRecord.name;",
+              "        }",
+              "    });",
+              "}",
+              "",
+              "pm.collectionVariables.set(\"officeIdNameMap\", JSON.stringify(officeIdNameMap));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "basic {{accessToken}}",
+            "type": "text"
+          },
+          {
+            "key": "{{tenantKey}}",
+            "value": "{{tenantId}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/offices?includeAllOffices=false&orderBy=id",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "offices"
+          ],
+          "query": [
+            {
+              "key": "includeAllOffices",
+              "value": "false"
+            },
+            {
+              "key": "orderBy",
+              "value": "id"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create active client",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "let mobileNumber = pm.collectionVariables.get(\"mobileNo\");\r",
+              "\r",
+              "if (!mobileNumber || !mobileNumber.startsWith(\"+61\")) {\r",
+              "    mobileNumber = \"+614\" + String(Math.floor(Math.random() * 100000000)).padStart(8, \"0\");;\r",
+              "} else {\r",
+              "    // Extract the 9-digit phone number part (skipping \"+61\")\r",
+              "    let nextPhoneNumber = Number(mobileNumber.substring(3)) + 1;\r",
+              "    // Pad with leading zeros just in case it starts with a zero (though AU mobiles start with 4)\r",
+              "    let paddedLocalNumber = String(nextPhoneNumber).padStart(9, '0');\r",
+              "    mobileNumber = \"+61\" + paddedLocalNumber;\r",
+              "}\r",
+              "\r",
+              "pm.collectionVariables.set(\"mobileNo\", mobileNumber);\r",
+              "\r",
+              "\r",
+              "function getRandomId(variableName) {\r",
+              "    const rawLookupMap = pm.collectionVariables.get(variableName);\r",
+              "    const idLookupMap = rawLookupMap ? JSON.parse(rawLookupMap) : {};\r",
+              "    const availableIds = Object.keys(idLookupMap);\r",
+              "\r",
+              "    if (availableIds.length === 0) {\r",
+              "        return null;\r",
+              "    }\r",
+              "\r",
+              "    return Number(availableIds[Math.floor(Math.random() * availableIds.length)]);\r",
+              "}\r",
+              "\r",
+              "const randomGenderId = getRandomId(\"genderIdNameMap\");\r",
+              "const randomStaffId = getRandomId(\"staffIdDisplayNameMap\");\r",
+              "const randomOfficeId = getRandomId(\"officeIdNameMap\") || 1;\r",
+              "\r",
+              "const clientDetails = {\r",
+              "    activationDate: \"04 March 2026\",\r",
+              "    active: true,\r",
+              "    address: [\r",
+              "        {\r",
+              "            addressLine1: pm.variables.replaceIn(\"{{$randomStreetAddress}}\"),\r",
+              "            addressLine2: \"Automation Quarter\",\r",
+              "            addressTypeId: 1,\r",
+              "            city: \"Sydney\",\r",
+              "            countryId: 1,\r",
+              "            isActive: true,\r",
+              "            postalCode: \"2000\",\r",
+              "            stateProvinceId: 1\r",
+              "        }\r",
+              "    ],\r",
+              "    dateFormat: \"dd MMMM yyyy\",\r",
+              "    dateOfBirth: pm.variables.replaceIn(\"07 {{$randomMonth}} 1990\"),\r",
+              "    emailAddress: pm.variables.replaceIn(\"sample.client{{$timestamp}}@example.com\"),\r",
+              "    externalId: pm.variables.replaceIn(\"CLIENT-{{$timestamp}}\"),\r",
+              "    firstname: pm.variables.replaceIn(\"{{$randomFirstName}}\"),\r",
+              "    lastname: pm.variables.replaceIn(\"{{$randomLastName}}\"),\r",
+              "    legalFormId: 1,\r",
+              "    locale: \"en\",\r",
+              "    mobileNo: mobileNumber,\r",
+              "    officeId: randomOfficeId,\r",
+              "    submittedOnDate: pm.variables.replaceIn(\"01 {{$randomMonth}} 2024\")\r",
+              "};\r",
+              "\r",
+              "if (randomGenderId !== null) {\r",
+              "    clientDetails.genderId = randomGenderId;\r",
+              "}\r",
+              "\r",
+              "if (randomStaffId !== null) {\r",
+              "    clientDetails.staffId = randomStaffId;\r",
+              "}\r",
+              "\r",
+              "pm.request.body.update(JSON.stringify(clientDetails));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let createClientResponse;",
+              "",
+              "pm.test('returns HTTP 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('returns a valid JSON object', function () {",
+              "    createClientResponse = pm.response.json();",
+              "    pm.expect(createClientResponse).to.be.an('object');",
+              "    pm.expect(createClientResponse).to.not.be.null;",
+              "});",
+              "",
+              "pm.test('Create client response includes key identifiers', function () {",
+              "    pm.expect(createClientResponse).to.have.property('officeId');",
+              "    pm.expect(createClientResponse).to.have.property('clientId');",
+              "    pm.expect(createClientResponse).to.have.property('resourceId');",
+              "    pm.expect(createClientResponse).to.have.property('resourceExternalId');",
+              "});",
+              "",
+              "pm.test('Create client identifiers are valid', function () {",
+              "    pm.expect(createClientResponse.officeId).to.be.a('number');",
+              "    pm.expect(createClientResponse.officeId).to.be.above(0);",
+              "    pm.expect(createClientResponse.clientId).to.be.a('number');",
+              "    pm.expect(createClientResponse.clientId).to.be.above(0);",
+              "    pm.expect(createClientResponse.resourceId).to.be.a('number');",
+              "    pm.expect(createClientResponse.resourceId).to.be.above(0);",
+              "    pm.expect(createClientResponse.resourceExternalId).to.be.a('string');",
+              "    pm.expect(createClientResponse.resourceExternalId).to.not.be.empty;",
+              "});",
+              "",
+              "pm.test('Resource ID matches created client ID', function () {",
+              "    pm.expect(createClientResponse.resourceId).to.eql(createClientResponse.clientId);",
+              "    pm.collectionVariables.set(\"clientId\", createClientResponse.clientId);",
+              "});",
+              "",
+              "pm.test('Resource external ID uses client prefix', function () {",
+              "    pm.expect(createClientResponse.resourceExternalId).to.match(/^CLIENT-/);",
+              "});",
+              "",
+              "if (pm.response.code === 200) {",
+              "    const clientDetails = JSON.parse(pm.variables.replaceIn(pm.request.body.raw));",
+              "    pm.collectionVariables.set(\"clientDetails\", JSON.stringify(clientDetails));",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "basic {{accessToken}}",
+            "type": "text"
+          },
+          {
+            "key": "{{tenantKey}}",
+            "value": "{{tenantId}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/clients",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "clients"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get created client",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"returns HTTP 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "let clientResponse;\r",
+              "pm.test(\"Response body is a valid JSON object\", function () {\r",
+              "    clientResponse = pm.response.json();\r",
+              "    pm.expect(clientResponse).to.be.an(\"object\");\r",
+              "});\r",
+              "\r",
+              "let clientDetails;\r",
+              "pm.test(\"Saved client request details exist\", function () {\r",
+              "    clientDetails = JSON.parse(pm.collectionVariables.get(\"clientDetails\"));\r",
+              "    pm.expect(clientDetails).to.be.an(\"object\");\r",
+              "});\r",
+              "\r",
+              "function fineractDateToString(dateArray) {\r",
+              "    const [year, month, day] = dateArray;\r",
+              "    const date = new Date(year, month - 1, day);\r",
+              "\r",
+              "    return date.toLocaleDateString(\"en-GB\", {\r",
+              "        day: \"2-digit\",\r",
+              "        month: \"long\",\r",
+              "        year: \"numeric\"\r",
+              "    });\r",
+              "}\r",
+              "\r",
+              "pm.test(\"Created client is active\", function () {\r",
+              "    pm.expect(clientResponse.active).to.eql(clientDetails.active);\r",
+              "    pm.expect(clientResponse.status.value).to.eql(\"Active\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Created client name matches request body\", function () {\r",
+              "    pm.expect(clientResponse.firstname).to.eql(clientDetails.firstname);\r",
+              "    pm.expect(clientResponse.lastname).to.eql(clientDetails.lastname);\r",
+              "    pm.expect(clientResponse.displayName).to.eql(`${clientDetails.firstname} ${clientDetails.lastname}`);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Created client contact details match request body\", function () {\r",
+              "    pm.expect(clientResponse.mobileNo).to.eql(clientDetails.mobileNo);\r",
+              "    pm.expect(clientResponse.emailAddress).to.eql(clientDetails.emailAddress);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Created client external ID matches request body\", function () {\r",
+              "    pm.expect(clientResponse.externalId).to.eql(clientDetails.externalId);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Created client office, staff, gender and legal form match request body\", function () {\r",
+              "    pm.expect(clientResponse.officeId).to.eql(clientDetails.officeId);\r",
+              "\r",
+              "    if (clientDetails.staffId !== undefined) {\r",
+              "        pm.expect(clientResponse.staffId).to.eql(clientDetails.staffId);\r",
+              "    }\r",
+              "\r",
+              "    if (clientDetails.genderId !== undefined) {\r",
+              "        pm.expect(clientResponse.gender.id).to.eql(clientDetails.genderId);\r",
+              "    }\r",
+              "    \r",
+              "    pm.expect(clientResponse.legalForm.id).to.eql(clientDetails.legalFormId);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Created client dates match request body\", function () {\r",
+              "    pm.expect(fineractDateToString(clientResponse.activationDate)).to.eql(clientDetails.activationDate);\r",
+              "    pm.expect(fineractDateToString(clientResponse.dateOfBirth)).to.eql(clientDetails.dateOfBirth);\r",
+              "    pm.expect(fineractDateToString(clientResponse.timeline.submittedOnDate)).to.eql(clientDetails.submittedOnDate);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "packages": {},
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "basic {{accessToken}}",
+            "type": "text"
+          },
+          {
+            "key": "{{tenantKey}}",
+            "value": "{{tenantId}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/clients/:clientId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "clients",
+            ":clientId"
+          ],
+          "variable": [
+            {
+              "key": "clientId",
+              "value": "{{clientId}}"
+            }
           ]
         }
       },
@@ -128,6 +682,30 @@
     },
     {
       "key": "accessToken",
+      "value": ""
+    },
+    {
+      "key": "genderIdNameMap",
+      "value": ""
+    },
+    {
+      "key": "staffIdDisplayNameMap",
+      "value": ""
+    },
+    {
+      "key": "officeIdNameMap",
+      "value": ""
+    },
+    {
+      "key": "clientId",
+      "value": ""
+    },
+    {
+      "key": "clientDetails",
+      "value": ""
+    },
+    {
+      "key": "mobileNo",
       "value": ""
     }
   ]
