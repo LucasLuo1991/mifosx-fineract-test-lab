@@ -1,3 +1,4 @@
+import { request, type APIResponse } from '@playwright/test';
 import { fineractHealthUrl } from '../support/env.js';
 
 type HealthResponse = {
@@ -10,42 +11,44 @@ export async function waitForHealthCheck(
     delaySeconds = 30,
     timeoutSeconds = 5,
 ): Promise<void> {
-    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-        try {
-            const response = await fetchWithTimeout(healthUrl, timeoutSeconds);
-            if (await isHealthyResponse(response)) {
-                return;
-            }
-        } catch {
-            // Retry until the health check budget expires.
-        }
+    const requestContext = await request.newContext();
 
-        if (attempt < maxAttempts - 1) {
-            await sleep(delaySeconds * 1000);
+    try {
+        for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+            try {
+                const response = await requestContext.fetch(healthUrl, {
+                    timeout: timeoutSeconds * 1000,
+                });
+
+                if (await isHealthyResponse(response)) {
+                    return;
+                }
+            } catch {
+                // Retry until the health check budget expires.
+            }
+
+            if (attempt < maxAttempts - 1) {
+                await sleep(delaySeconds * 1000);
+            }
         }
+    } finally {
+        await requestContext.dispose();
     }
 
     throw new Error(`Service did not become healthy at ${healthUrl}.`);
 }
 
-async function fetchWithTimeout(url: string, timeoutSeconds: number): Promise<Response> {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), timeoutSeconds * 1000);
-
-    try {
-        return await fetch(url, { signal: controller.signal });
-    } finally {
-        clearTimeout(timeout);
-    }
-}
-
-async function isHealthyResponse(response: Response): Promise<boolean> {
-    if (response.status !== 200) {
+async function isHealthyResponse(response: APIResponse): Promise<boolean> {
+    if (response.status() !== 200) {
         return false;
     }
 
-    const body: unknown = await response.json();
-    return isHealthResponse(body) && body.status === 'UP';
+    try {
+        const body: unknown = await response.json();
+        return isHealthResponse(body) && body.status === 'UP';
+    } catch {
+        return false;
+    }
 }
 
 function isHealthResponse(body: unknown): body is HealthResponse {
