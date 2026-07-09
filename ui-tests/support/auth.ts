@@ -5,11 +5,6 @@ import path from 'path';
 export const authStorageStateFile = 'playwright/.auth/user.json';
 export const authSessionStorageStateFile = 'playwright/.auth/session.json';
 
-export const loginCredentials = {
-    username: process.env.API_USER || 'mifos',
-    password: process.env.API_PASS || 'password',
-};
-
 export async function saveAuthSessionStorage(page: Page) {
     const sessionStorage = await page.evaluate(() => JSON.stringify(window.sessionStorage));
 

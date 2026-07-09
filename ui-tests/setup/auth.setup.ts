@@ -2,9 +2,9 @@ import { expect, test as setup } from '../fixtures/test.js';
 import {
   addAuthSessionStorage,
   authStorageStateFile,
-  loginCredentials,
   saveAuthSessionStorage,
 } from '../support/auth.js';
+import { loginCredentials } from '../support/env.js';
 import { routes } from '../support/routes.js';
 
 setup('create authenticated storage state', async ({ browser, page, pageManager }) => {

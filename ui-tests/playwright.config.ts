@@ -1,21 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
-import process from 'process';
-import { fileURLToPath } from 'url';
 import { authStorageStateFile } from './support/auth.js';
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-import dotenv from 'dotenv';
-import path from 'path';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-dotenv.config({ path: path.resolve(__dirname, '../.env'), quiet: true });
-
-const isCI = !!process.env.CI;
-const webAppBaseUrl = process.env.WEB_APP_URL || `http://localhost:${process.env.WEB_APP_PORT || '4200'}`;
+import { isCI, webAppBaseUrl } from './support/env.js';
 
 /**
  * See https://playwright.dev/docs/test-configuration.

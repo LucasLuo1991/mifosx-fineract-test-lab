@@ -1,20 +1,11 @@
-import dotenv from 'dotenv';
-import path from 'path';
-import process from 'process';
-import { fileURLToPath } from 'url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-dotenv.config({ path: path.resolve(__dirname, '../../.env'), quiet: true });
-
-const HEALTH_PATH = '/fineract-provider/actuator/health';
+import { fineractHealthUrl } from '../support/env.js';
 
 type HealthResponse = {
     status?: unknown;
 };
 
 export async function waitForHealthCheck(
-    healthUrl = buildFineractHealthUrl(),
+    healthUrl = fineractHealthUrl,
     maxAttempts = 10,
     delaySeconds = 30,
     timeoutSeconds = 5,
@@ -35,11 +26,6 @@ export async function waitForHealthCheck(
     }
 
     throw new Error(`Service did not become healthy at ${healthUrl}.`);
-}
-
-function buildFineractHealthUrl(): string {
-    const serverUrl = process.env.SERVER_URL || `http://localhost:${process.env.FINERACT_PORT || '3000'}`;
-    return `${serverUrl.replace(/\/+$/, '')}${HEALTH_PATH}`;
 }
 
 async function fetchWithTimeout(url: string, timeoutSeconds: number): Promise<Response> {
