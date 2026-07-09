@@ -48,7 +48,7 @@ pipeline {
           script {
             catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
               sh '''
-                docker compose exec -T test-runner sh -c 'cd /app/api-tests && mkdir -p test-results && newman run "MifosX Fineract API Tests.postman_collection.json" --env-var baseUrl="${SERVER_URL}/fineract-provider/api/v1" --reporters cli,junit,htmlextra --reporter-junit-export test-results/newman-results.xml --reporter-htmlextra-export test-results/newman-report.html'
+                docker compose exec -T test-runner sh -c 'cd /app/api-tests && mkdir -p test-results && newman run "MifosX Fineract API Tests.postman_collection.json" --env-var baseUrl="${SERVER_URL}/fineract-provider/api" --reporters cli,junit,htmlextra --reporter-junit-export test-results/newman-results.xml --reporter-htmlextra-export test-results/newman-report.html'
               '''
             }
             sh '''

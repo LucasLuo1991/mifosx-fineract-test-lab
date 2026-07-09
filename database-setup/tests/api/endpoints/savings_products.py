@@ -47,7 +47,7 @@ class SavingsProductsEndpoint(BaseEndpoint):
     ) -> list[Any]:
         """Return savings products from the Fineract API."""
         return self._get(
-            "/savingsproducts",
+            "v1/savingsproducts",
             expected_status,
         )
 
@@ -56,7 +56,7 @@ class SavingsProductsEndpoint(BaseEndpoint):
     ) -> dict[str, Any]:
         """Create a Fineract savings product from a seed payload."""
         return self._post(
-            "/savingsproducts", self._savings_product_payload(savings_product), expected_status
+            "v1/savingsproducts", self._savings_product_payload(savings_product), expected_status
         )
 
     def _savings_product_payload(self, savings_product: SavingsProductPayload) -> dict[str, Any]:

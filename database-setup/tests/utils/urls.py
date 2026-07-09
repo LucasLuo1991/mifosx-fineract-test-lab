@@ -1,4 +1,4 @@
-DEFAULT_API_PATH = "/fineract-provider/api/v1"
+DEFAULT_API_PATH = "/fineract-provider/api"
 DEFAULT_HEALTH_PATH = "/fineract-provider/actuator/health"
 
 

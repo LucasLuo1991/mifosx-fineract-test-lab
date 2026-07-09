@@ -31,7 +31,7 @@ class FineractApiClient:
         """Authenticate with Fineract and store the returned Basic auth header."""
         try:
             res = self.session.post(
-                f"{self.api_base_url}/authentication",
+                f"{self.api_base_url}/v1/authentication",
                 headers={
                     "Accept": "application/json",
                     "fineract-platform-tenantid": self.tenant_id,

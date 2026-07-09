@@ -37,7 +37,7 @@ class StaffEndpoint(BaseEndpoint):
     ) -> list[Any]:
         """Return staff from the Fineract API using optional filters."""
         return self._get(
-            "/staff",
+            "v1/staff",
             expected_status,
             params=self._list_staff_params(
                 office_id=office_id,
@@ -51,7 +51,7 @@ class StaffEndpoint(BaseEndpoint):
         self, staff: StaffPayload, expected_status: int = 200
     ) -> dict[str, Any]:
         """Create a Fineract staff member from a seed payload."""
-        return self._post("/staff", self._staff_payload(staff), expected_status)
+        return self._post("v1/staff", self._staff_payload(staff), expected_status)
 
     def _list_staff_params(
         self,

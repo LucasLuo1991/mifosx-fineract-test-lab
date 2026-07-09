@@ -74,11 +74,12 @@
           }
         },
         "url": {
-          "raw": "{{baseUrl}}/authentication",
+          "raw": "{{baseUrl}}/v1/authentication",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
+            "v1",
             "authentication"
           ]
         }
@@ -148,11 +149,12 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/codes/name/:codeName/codevalues",
+          "raw": "{{baseUrl}}/v1/codes/name/:codeName/codevalues",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
+            "v1",
             "codes",
             "name",
             ":codeName",
@@ -238,11 +240,12 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/staff?status=ACTIVE",
+          "raw": "{{baseUrl}}/v1/staff?status=ACTIVE",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
+            "v1",
             "staff"
           ],
           "query": [
@@ -318,11 +321,12 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/offices?includeAllOffices=false&orderBy=id",
+          "raw": "{{baseUrl}}/v1/offices?includeAllOffices=false&orderBy=id",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
+            "v1",
             "offices"
           ],
           "query": [
@@ -503,11 +507,12 @@
           }
         },
         "url": {
-          "raw": "{{baseUrl}}/clients",
+          "raw": "{{baseUrl}}/v1/clients",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
+            "v1",
             "clients"
           ]
         }
@@ -609,11 +614,12 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/clients/:clientId",
+          "raw": "{{baseUrl}}/v1/clients/:clientId",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
+            "v1",
             "clients",
             ":clientId"
           ],
@@ -631,7 +637,7 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://localhost:3000/fineract-provider/api/v1"
+      "value": "http://localhost:3000/fineract-provider/api"
     },
     {
       "key": "username",

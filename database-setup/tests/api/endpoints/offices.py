@@ -32,7 +32,7 @@ class OfficesEndpoint(BaseEndpoint):
     ) -> list[Any]:
         """Return offices from the Fineract API using optional filters."""
         return self._get(
-            "/offices",
+            "v1/offices",
             expected_status,
             params=self._list_offices_params(
                 include_all_offices=include_all_offices,
@@ -45,7 +45,7 @@ class OfficesEndpoint(BaseEndpoint):
         self, office: OfficePayload, expected_status: int = 200
     ) -> dict[str, Any]:
         """Create a Fineract office from a seed payload."""
-        return self._post("/offices", self._office_payload(office), expected_status)
+        return self._post("v1/offices", self._office_payload(office), expected_status)
 
     def _list_offices_params(
         self,

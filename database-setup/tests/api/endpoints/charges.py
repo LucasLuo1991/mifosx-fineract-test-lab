@@ -44,7 +44,7 @@ class ChargesEndpoint(BaseEndpoint):
     ) -> list[Any]:
         """Return charges from the Fineract API."""
         return self._get(
-            "/charges",
+            "v1/charges",
             expected_status,
         )
 
@@ -52,7 +52,7 @@ class ChargesEndpoint(BaseEndpoint):
         self, charge: ChargePayload, expected_status: int = 200
     ) -> dict[str, Any]:
         """Create a Fineract charge from a seed payload."""
-        return self._post("/charges", self._charge_payload(charge), expected_status)
+        return self._post("v1/charges", self._charge_payload(charge), expected_status)
 
     def _charge_payload(self, charge: ChargePayload) -> dict[str, Any]:
         """Convert a typed charge payload to a mutable request body."""

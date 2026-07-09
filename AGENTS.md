@@ -38,10 +38,11 @@ By default, the checked-in environment maps services to these host URLs:
 
 - Web app: `http://localhost:4200`
 - Fineract API: `http://localhost:3000`
+- Fineract API base: `http://localhost:3000/fineract-provider/api`
 - PostgreSQL: `localhost:5432`
 
 Check the root `.env.example` before changing tests that depend on ports, credentials, tenant names, or database names.
-Host-facing test URLs are derived from the port variables by default. Set `WEB_APP_FINERACT_API_URL=http://fineract-server:8080` when the browser runs inside the Compose `test-runner` container.
+Host-facing test URLs are derived from the port variables by default. `API_BASE_URL` should stop at `/fineract-provider/api`; test clients and Newman collections add `/v1` in endpoint paths. Set `WEB_APP_FINERACT_API_URL=http://fineract-server:8080` when the browser runs inside the Compose `test-runner` container.
 
 ## Test Commands
 

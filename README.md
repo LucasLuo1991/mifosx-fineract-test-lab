@@ -43,13 +43,15 @@ Default host URLs:
 | --- | --- |
 | Web app | `http://localhost:4200` |
 | Fineract server | `http://localhost:3000` |
-| Fineract API base | `http://localhost:3000/fineract-provider/api/v1` |
+| Fineract API base | `http://localhost:3000/fineract-provider/api` |
 | Fineract health | `http://localhost:3000/fineract-provider/actuator/health` |
 | PostgreSQL | `localhost:5432` |
 
 Use the root `.env.example` as the template for local or Jenkins-specific values shared by Docker Compose, pytest, Playwright, and Newman. When starting Compose from `mifosx-platform/`, pass the root env file with `docker compose --env-file ..\.env up -d`.
 
-The host-facing URLs default to the configured ports. Set `SERVER_URL`, `WEB_APP_URL`, or `DB_ENDPOINT` only when a test needs a full URL/endpoint override.
+The host-facing URLs default to the configured ports. Set `SERVER_URL`, `WEB_APP_URL`, `API_BASE_URL`, or `DB_ENDPOINT` only when a test needs a full URL/endpoint override.
+
+`API_BASE_URL` is the base path without the version segment, for example `http://localhost:3000/fineract-provider/api`. Tests append `/v1` in their endpoint paths.
 
 `WEB_APP_FINERACT_API_URL` is injected into the web app and is used by the browser. By default it is derived from `FINERACT_PORT`. Override it with `http://fineract-server:8080` when running Playwright inside the Compose `test-runner` container.
 
@@ -78,7 +80,7 @@ The tests read configuration from environment variables when present, otherwise 
 | `SERVER_URL` | built from `FINERACT_PORT` |
 | `WEB_APP_URL` | built from `WEB_APP_PORT` |
 | `WEB_APP_FINERACT_API_URL` | built from `FINERACT_PORT` |
-| `API_BASE_URL` | built from `SERVER_URL` |
+| `API_BASE_URL` | built from `SERVER_URL` as `/fineract-provider/api` |
 | `API_USER` | `mifos` |
 | `API_PASS` | `password` |
 | `TENANT_ID` | `default` |
