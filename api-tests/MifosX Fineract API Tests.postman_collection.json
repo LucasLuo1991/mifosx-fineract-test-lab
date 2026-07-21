@@ -1,8 +1,8 @@
 {
   "info": {
-    "_postman_id": "51e60ac8-ddb7-4d99-8970-33e7be638915",
+    "_postman_id": "62bf243c-ddd5-49f5-9837-382f59db568a",
     "name": "MifosX Fineract API Tests",
-    "description": "Postman collection for testing MifosX Fineract APIs in the sandbox environment.\n\nAPI documentation:  \n[https://sandbox.mifos.community/fineract-provider/swagger-ui/index.html](https://sandbox.mifos.community/fineract-provider/swagger-ui/index.html)\n\nThis collection supports functional, integration, and regression testing of key Fineract endpoints. It uses collection variables for environment-specific configuration, including baseUrl, username, password, tenantId, and tenantKey.",
+    "description": "Postman collection for testing MifosX Fineract APIs against the local Mifos/Fineract stack.\n\nAPI documentation:  \n[https://sandbox.mifos.community/fineract-provider/swagger-ui/index.html](https://sandbox.mifos.community/fineract-provider/swagger-ui/index.html)\n\nThis collection supports functional, integration, and regression testing of key Fineract endpoints. It uses collection variables for environment-specific configuration, including baseUrl, username, password, tenantId, and tenantKey.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "32238981"
   },
@@ -42,7 +42,7 @@
               "\r",
               "if (authResponse && authResponse.base64EncodedAuthenticationKey) {\r",
               "    pm.collectionVariables.set(\"accessToken\", authResponse.base64EncodedAuthenticationKey);\r",
-              "}"
+              "}\r"
             ],
             "type": "text/javascript",
             "packages": {},
@@ -93,40 +93,40 @@
           "listen": "test",
           "script": {
             "exec": [
-              "let genderCodeValues;",
-              "",
-              "pm.test(\"returns HTTP 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test(\"Response body is valid JSON\", function () {",
-              "    genderCodeValues = pm.response.json();",
-              "    pm.expect(genderCodeValues).to.exist;",
-              "});",
-              "",
-              "pm.test(\"Response contains gender code values\", function () {",
-              "    pm.expect(genderCodeValues).to.be.an(\"array\");",
-              "});",
-              "",
-              "pm.test(\"Gender code values include ID and name\", function () {",
-              "    genderCodeValues.forEach(function (genderCodeValue) {",
-              "        pm.expect(genderCodeValue).to.be.an(\"object\");",
-              "        pm.expect(genderCodeValue).to.have.property(\"id\");",
-              "        pm.expect(genderCodeValue).to.have.property(\"name\");",
-              "    });",
-              "});",
-              "",
-              "const genderIdNameMap = {};",
-              "",
-              "if (Array.isArray(genderCodeValues)) {",
-              "    genderCodeValues.forEach(function (genderCodeValue) {",
-              "        if (genderCodeValue && genderCodeValue.id !== undefined && genderCodeValue.name !== undefined) {",
-              "            genderIdNameMap[genderCodeValue.id] = genderCodeValue.name;",
-              "        }",
-              "    });",
-              "}",
-              "",
-              "pm.collectionVariables.set(\"genderIdNameMap\", JSON.stringify(genderIdNameMap));"
+              "let genderCodeValues;\r",
+              "\r",
+              "pm.test(\"returns HTTP 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body is valid JSON\", function () {\r",
+              "    genderCodeValues = pm.response.json();\r",
+              "    pm.expect(genderCodeValues).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response contains gender code values\", function () {\r",
+              "    pm.expect(genderCodeValues).to.be.an(\"array\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Gender code values include ID and name\", function () {\r",
+              "    genderCodeValues.forEach(function (genderCodeValue) {\r",
+              "        pm.expect(genderCodeValue).to.be.an(\"object\");\r",
+              "        pm.expect(genderCodeValue).to.have.property(\"id\");\r",
+              "        pm.expect(genderCodeValue).to.have.property(\"name\");\r",
+              "    });\r",
+              "});\r",
+              "\r",
+              "const genderIdNameMap = {};\r",
+              "\r",
+              "if (Array.isArray(genderCodeValues)) {\r",
+              "    genderCodeValues.forEach(function (genderCodeValue) {\r",
+              "        if (genderCodeValue && genderCodeValue.id !== undefined && genderCodeValue.name !== undefined) {\r",
+              "            genderIdNameMap[genderCodeValue.id] = genderCodeValue.name;\r",
+              "        }\r",
+              "    });\r",
+              "}\r",
+              "\r",
+              "pm.collectionVariables.set(\"genderIdNameMap\", JSON.stringify(genderIdNameMap));\r"
             ],
             "type": "text/javascript",
             "packages": {},
@@ -217,7 +217,7 @@
               "    });\r",
               "}\r",
               "\r",
-              "pm.collectionVariables.set(\"staffIdDisplayNameMap\", JSON.stringify(staffIdDisplayNameMap));"
+              "pm.collectionVariables.set(\"staffIdDisplayNameMap\", JSON.stringify(staffIdDisplayNameMap));\r"
             ],
             "type": "text/javascript",
             "packages": {},
@@ -265,40 +265,40 @@
           "listen": "test",
           "script": {
             "exec": [
-              "let officeRecords;",
-              "",
-              "pm.test(\"returns HTTP 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test(\"Response body is valid JSON\", function () {",
-              "    officeRecords = pm.response.json();",
-              "    pm.expect(officeRecords).to.exist;",
-              "});",
-              "",
-              "pm.test(\"Response contains office records\", function () {",
-              "    pm.expect(officeRecords).to.be.an(\"array\");",
-              "});",
-              "",
-              "pm.test(\"Office records include ID and name\", function () {",
-              "    officeRecords.forEach(function (officeRecord) {",
-              "        pm.expect(officeRecord).to.be.an(\"object\");",
-              "        pm.expect(officeRecord).to.have.property(\"id\");",
-              "        pm.expect(officeRecord).to.have.property(\"name\");",
-              "    });",
-              "});",
-              "",
-              "const officeIdNameMap = {};",
-              "",
-              "if (Array.isArray(officeRecords)) {",
-              "    officeRecords.forEach(function (officeRecord) {",
-              "        if (officeRecord && officeRecord.id !== undefined && officeRecord.name !== undefined) {",
-              "            officeIdNameMap[officeRecord.id] = officeRecord.name;",
-              "        }",
-              "    });",
-              "}",
-              "",
-              "pm.collectionVariables.set(\"officeIdNameMap\", JSON.stringify(officeIdNameMap));"
+              "let officeRecords;\r",
+              "\r",
+              "pm.test(\"returns HTTP 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body is valid JSON\", function () {\r",
+              "    officeRecords = pm.response.json();\r",
+              "    pm.expect(officeRecords).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response contains office records\", function () {\r",
+              "    pm.expect(officeRecords).to.be.an(\"array\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Office records include ID and name\", function () {\r",
+              "    officeRecords.forEach(function (officeRecord) {\r",
+              "        pm.expect(officeRecord).to.be.an(\"object\");\r",
+              "        pm.expect(officeRecord).to.have.property(\"id\");\r",
+              "        pm.expect(officeRecord).to.have.property(\"name\");\r",
+              "    });\r",
+              "});\r",
+              "\r",
+              "const officeIdNameMap = {};\r",
+              "\r",
+              "if (Array.isArray(officeRecords)) {\r",
+              "    officeRecords.forEach(function (officeRecord) {\r",
+              "        if (officeRecord && officeRecord.id !== undefined && officeRecord.name !== undefined) {\r",
+              "            officeIdNameMap[officeRecord.id] = officeRecord.name;\r",
+              "        }\r",
+              "    });\r",
+              "}\r",
+              "\r",
+              "pm.collectionVariables.set(\"officeIdNameMap\", JSON.stringify(officeIdNameMap));\r"
             ],
             "type": "text/javascript",
             "packages": {},
@@ -353,24 +353,25 @@
               "let mobileNumber = pm.collectionVariables.get(\"mobileNo\");\r",
               "\r",
               "if (!mobileNumber || !mobileNumber.startsWith(\"+61\")) {\r",
-              "    mobileNumber = \"+614\" + String(Math.floor(Math.random() * 100000000)).padStart(8, \"0\");;\r",
+              "    mobileNumber = \"+614\" + String(Math.floor(Math.random() * 100000000)).padStart(8, \"0\");\r",
               "} else {\r",
-              "    // Extract the 9-digit phone number part (skipping \"+61\")\r",
-              "    let nextPhoneNumber = Number(mobileNumber.substring(3)) + 1;\r",
-              "    // Pad with leading zeros just in case it starts with a zero (though AU mobiles start with 4)\r",
-              "    let paddedLocalNumber = String(nextPhoneNumber).padStart(9, '0');\r",
+              "    const nextPhoneNumber = Number(mobileNumber.substring(3)) + 1;\r",
+              "    const paddedLocalNumber = String(nextPhoneNumber).padStart(9, \"0\");\r",
               "    mobileNumber = \"+61\" + paddedLocalNumber;\r",
               "}\r",
               "\r",
               "pm.collectionVariables.set(\"mobileNo\", mobileNumber);\r",
               "\r",
-              "\r",
-              "function getRandomId(variableName) {\r",
+              "function getRandomId(variableName, options = {}) {\r",
               "    const rawLookupMap = pm.collectionVariables.get(variableName);\r",
               "    const idLookupMap = rawLookupMap ? JSON.parse(rawLookupMap) : {};\r",
               "    const availableIds = Object.keys(idLookupMap);\r",
               "\r",
               "    if (availableIds.length === 0) {\r",
+              "        if (options.required) {\r",
+              "            throw new Error(`${variableName} has no IDs. Run the lookup setup request before this request.`);\r",
+              "        }\r",
+              "\r",
               "        return null;\r",
               "    }\r",
               "\r",
@@ -379,7 +380,7 @@
               "\r",
               "const randomGenderId = getRandomId(\"genderIdNameMap\");\r",
               "const randomStaffId = getRandomId(\"staffIdDisplayNameMap\");\r",
-              "const randomOfficeId = getRandomId(\"officeIdNameMap\") || 1;\r",
+              "const randomOfficeId = getRandomId(\"officeIdNameMap\", { required: true });\r",
               "\r",
               "const clientDetails = {\r",
               "    activationDate: \"04 March 2026\",\r",
@@ -397,7 +398,7 @@
               "        }\r",
               "    ],\r",
               "    dateFormat: \"dd MMMM yyyy\",\r",
-              "    dateOfBirth: pm.variables.replaceIn(\"07 {{$randomMonth}} 1990\"),\r",
+              "    dateOfBirth: \"07 March 1990\",\r",
               "    emailAddress: pm.variables.replaceIn(\"sample.client{{$timestamp}}@example.com\"),\r",
               "    externalId: pm.variables.replaceIn(\"CLIENT-{{$timestamp}}\"),\r",
               "    firstname: pm.variables.replaceIn(\"{{$randomFirstName}}\"),\r",
@@ -406,7 +407,7 @@
               "    locale: \"en\",\r",
               "    mobileNo: mobileNumber,\r",
               "    officeId: randomOfficeId,\r",
-              "    submittedOnDate: pm.variables.replaceIn(\"01 {{$randomMonth}} 2024\")\r",
+              "    submittedOnDate: \"01 March 2024\"\r",
               "};\r",
               "\r",
               "if (randomGenderId !== null) {\r",
@@ -417,7 +418,7 @@
               "    clientDetails.staffId = randomStaffId;\r",
               "}\r",
               "\r",
-              "pm.request.body.update(JSON.stringify(clientDetails));"
+              "pm.request.body.update(JSON.stringify(clientDetails));\r"
             ],
             "type": "text/javascript",
             "packages": {},
@@ -428,49 +429,49 @@
           "listen": "test",
           "script": {
             "exec": [
-              "let createClientResponse;",
-              "",
-              "pm.test('returns HTTP 200', function () {",
-              "    pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test('returns a valid JSON object', function () {",
-              "    createClientResponse = pm.response.json();",
-              "    pm.expect(createClientResponse).to.be.an('object');",
-              "    pm.expect(createClientResponse).to.not.be.null;",
-              "});",
-              "",
-              "pm.test('Create client response includes key identifiers', function () {",
-              "    pm.expect(createClientResponse).to.have.property('officeId');",
-              "    pm.expect(createClientResponse).to.have.property('clientId');",
-              "    pm.expect(createClientResponse).to.have.property('resourceId');",
-              "    pm.expect(createClientResponse).to.have.property('resourceExternalId');",
-              "});",
-              "",
-              "pm.test('Create client identifiers are valid', function () {",
-              "    pm.expect(createClientResponse.officeId).to.be.a('number');",
-              "    pm.expect(createClientResponse.officeId).to.be.above(0);",
-              "    pm.expect(createClientResponse.clientId).to.be.a('number');",
-              "    pm.expect(createClientResponse.clientId).to.be.above(0);",
-              "    pm.expect(createClientResponse.resourceId).to.be.a('number');",
-              "    pm.expect(createClientResponse.resourceId).to.be.above(0);",
-              "    pm.expect(createClientResponse.resourceExternalId).to.be.a('string');",
-              "    pm.expect(createClientResponse.resourceExternalId).to.not.be.empty;",
-              "});",
-              "",
-              "pm.test('Resource ID matches created client ID', function () {",
-              "    pm.expect(createClientResponse.resourceId).to.eql(createClientResponse.clientId);",
-              "    pm.collectionVariables.set(\"clientId\", createClientResponse.clientId);",
-              "});",
-              "",
-              "pm.test('Resource external ID uses client prefix', function () {",
-              "    pm.expect(createClientResponse.resourceExternalId).to.match(/^CLIENT-/);",
-              "});",
-              "",
-              "if (pm.response.code === 200) {",
-              "    const clientDetails = JSON.parse(pm.variables.replaceIn(pm.request.body.raw));",
-              "    pm.collectionVariables.set(\"clientDetails\", JSON.stringify(clientDetails));",
-              "}"
+              "let createClientResponse;\r",
+              "\r",
+              "pm.test('returns HTTP 200', function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test('returns a valid JSON object', function () {\r",
+              "    createClientResponse = pm.response.json();\r",
+              "    pm.expect(createClientResponse).to.be.an('object');\r",
+              "    pm.expect(createClientResponse).to.not.be.null;\r",
+              "});\r",
+              "\r",
+              "pm.test('Create client response includes key identifiers', function () {\r",
+              "    pm.expect(createClientResponse).to.have.property('officeId');\r",
+              "    pm.expect(createClientResponse).to.have.property('clientId');\r",
+              "    pm.expect(createClientResponse).to.have.property('resourceId');\r",
+              "    pm.expect(createClientResponse).to.have.property('resourceExternalId');\r",
+              "});\r",
+              "\r",
+              "pm.test('Create client identifiers are valid', function () {\r",
+              "    pm.expect(createClientResponse.officeId).to.be.a('number');\r",
+              "    pm.expect(createClientResponse.officeId).to.be.above(0);\r",
+              "    pm.expect(createClientResponse.clientId).to.be.a('number');\r",
+              "    pm.expect(createClientResponse.clientId).to.be.above(0);\r",
+              "    pm.expect(createClientResponse.resourceId).to.be.a('number');\r",
+              "    pm.expect(createClientResponse.resourceId).to.be.above(0);\r",
+              "    pm.expect(createClientResponse.resourceExternalId).to.be.a('string');\r",
+              "    pm.expect(createClientResponse.resourceExternalId).to.not.be.empty;\r",
+              "});\r",
+              "\r",
+              "pm.test('Resource ID matches created client ID', function () {\r",
+              "    pm.expect(createClientResponse.resourceId).to.eql(createClientResponse.clientId);\r",
+              "    pm.collectionVariables.set(\"clientId\", createClientResponse.clientId);\r",
+              "});\r",
+              "\r",
+              "pm.test('Resource external ID uses client prefix', function () {\r",
+              "    pm.expect(createClientResponse.resourceExternalId).to.match(/^CLIENT-/);\r",
+              "});\r",
+              "\r",
+              "if (pm.response.code === 200) {\r",
+              "    const clientDetails = JSON.parse(pm.variables.replaceIn(pm.request.body.raw));\r",
+              "    pm.collectionVariables.set(\"clientDetails\", JSON.stringify(clientDetails));\r",
+              "}\r"
             ],
             "type": "text/javascript",
             "packages": {},
@@ -583,7 +584,7 @@
               "    if (clientDetails.genderId !== undefined) {\r",
               "        pm.expect(clientResponse.gender.id).to.eql(clientDetails.genderId);\r",
               "    }\r",
-              "    \r",
+              "\r",
               "    pm.expect(clientResponse.legalForm.id).to.eql(clientDetails.legalFormId);\r",
               "});\r",
               "\r",
@@ -591,7 +592,7 @@
               "    pm.expect(fineractDateToString(clientResponse.activationDate)).to.eql(clientDetails.activationDate);\r",
               "    pm.expect(fineractDateToString(clientResponse.dateOfBirth)).to.eql(clientDetails.dateOfBirth);\r",
               "    pm.expect(fineractDateToString(clientResponse.timeline.submittedOnDate)).to.eql(clientDetails.submittedOnDate);\r",
-              "});"
+              "});\r"
             ],
             "type": "text/javascript",
             "packages": {},
@@ -627,6 +628,315 @@
             {
               "key": "clientId",
               "value": "{{clientId}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List roles",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let roleRecords;\r",
+              "\r",
+              "pm.test(\"returns HTTP 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body is valid JSON\", function () {\r",
+              "    roleRecords = pm.response.json();\r",
+              "    pm.expect(roleRecords).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response contains role records\", function () {\r",
+              "    pm.expect(roleRecords).to.be.an(\"array\").and.not.empty;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Role records include ID and name\", function () {\r",
+              "    roleRecords.forEach(function (roleRecord) {\r",
+              "        pm.expect(roleRecord).to.be.an(\"object\");\r",
+              "        pm.expect(roleRecord).to.have.property(\"id\");\r",
+              "        pm.expect(roleRecord).to.have.property(\"name\");\r",
+              "    });\r",
+              "});\r",
+              "\r",
+              "const roleIdNameMap = {};\r",
+              "\r",
+              "if (Array.isArray(roleRecords)) {\r",
+              "    roleRecords.forEach(function (roleRecord) {\r",
+              "        if (roleRecord && roleRecord.id !== undefined && roleRecord.name !== undefined) {\r",
+              "            roleIdNameMap[roleRecord.id] = roleRecord.name;\r",
+              "        }\r",
+              "    });\r",
+              "}\r",
+              "\r",
+              "pm.collectionVariables.set(\"roleIdNameMap\", JSON.stringify(roleIdNameMap));\r"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "basic {{accessToken}}",
+            "type": "text"
+          },
+          {
+            "key": "{{tenantKey}}",
+            "value": "{{tenantId}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/v1/roles",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "v1",
+            "roles"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create new user",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "function getRandomId(variableName) {\r",
+              "    const rawLookupMap = pm.collectionVariables.get(variableName);\r",
+              "    const idLookupMap = rawLookupMap ? JSON.parse(rawLookupMap) : {};\r",
+              "    const availableIds = Object.keys(idLookupMap);\r",
+              "\r",
+              "    if (availableIds.length === 0) {\r",
+              "        throw new Error(`${variableName} has no IDs. Run the lookup setup request before this request.`);\r",
+              "    }\r",
+              "\r",
+              "    return Number(availableIds[Math.floor(Math.random() * availableIds.length)]);\r",
+              "}\r",
+              "\r",
+              "const randomOfficeId = getRandomId(\"officeIdNameMap\");\r",
+              "const randomRoleId = getRandomId(\"roleIdNameMap\");\r",
+              "const password = pm.collectionVariables.get(\"newUserPassword\") || \"MifosTest7@Q\";\r",
+              "\r",
+              "const userDetails = {\r",
+              "    email: pm.variables.replaceIn(\"whatever.{{$timestamp}}@mifos.org\"),\r",
+              "    firstname: \"Test\",\r",
+              "    isLoginRetriesEnabled: true,\r",
+              "    isPasswordResetAllowed: true,\r",
+              "    lastname: \"User\",\r",
+              "    officeId: randomOfficeId,\r",
+              "    password,\r",
+              "    passwordNeverExpires: true,\r",
+              "    repeatPassword: password,\r",
+              "    roles: [randomRoleId],\r",
+              "    sendPasswordToEmail: false,\r",
+              "    username: pm.variables.replaceIn(\"newuser{{$timestamp}}\")\r",
+              "};\r",
+              "\r",
+              "pm.request.body.update(JSON.stringify(userDetails));\r"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let createUserResponse;\r",
+              "\r",
+              "pm.test('returns HTTP 200', function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test('returns a valid JSON object', function () {\r",
+              "    createUserResponse = pm.response.json();\r",
+              "    pm.expect(createUserResponse).to.be.an('object');\r",
+              "    pm.expect(createUserResponse).to.not.be.null;\r",
+              "});\r",
+              "\r",
+              "pm.test('Create user response includes key identifiers', function () {\r",
+              "    pm.expect(createUserResponse).to.have.property('officeId');\r",
+              "    pm.expect(createUserResponse).to.have.property('resourceId');\r",
+              "});\r",
+              "\r",
+              "pm.test('Create user identifiers are valid', function () {\r",
+              "    pm.expect(createUserResponse.officeId).to.be.a('number');\r",
+              "    pm.expect(createUserResponse.officeId).to.be.above(0);\r",
+              "    pm.expect(createUserResponse.resourceId).to.be.a('number');\r",
+              "    pm.expect(createUserResponse.resourceId).to.be.above(0);\r",
+              "});\r",
+              "\r",
+              "pm.test('Resource ID is present for created user', function () {\r",
+              "    pm.expect(createUserResponse.resourceId).to.be.a('number');\r",
+              "    pm.expect(createUserResponse.resourceId).to.be.above(0);\r",
+              "    pm.collectionVariables.set(\"userId\", createUserResponse.resourceId);\r",
+              "});\r",
+              "\r",
+              "if (pm.response.code === 200) {\r",
+              "    const userDetails = JSON.parse(pm.variables.replaceIn(pm.request.body.raw));\r",
+              "    pm.collectionVariables.set(\"userDetails\", JSON.stringify(userDetails));\r",
+              "}\r"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "basic {{accessToken}}",
+            "type": "text"
+          },
+          {
+            "key": "{{tenantKey}}",
+            "value": "{{tenantId}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/v1/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "v1",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get created user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let getUserResponse;\r",
+              "let userDetails;\r",
+              "\r",
+              "pm.test('returns HTTP 200', function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test('returns a valid JSON object', function () {\r",
+              "    getUserResponse = pm.response.json();\r",
+              "    pm.expect(getUserResponse).to.be.an('object');\r",
+              "    pm.expect(getUserResponse).to.not.be.null;\r",
+              "});\r",
+              "\r",
+              "pm.test('Saved user request details exist', function () {\r",
+              "    userDetails = JSON.parse(pm.collectionVariables.get('userDetails'));\r",
+              "    pm.expect(userDetails).to.be.an('object');\r",
+              "});\r",
+              "\r",
+              "function expectFieldsToMatchResponse(fields) {\r",
+              "    fields.forEach((field) => {\r",
+              "        pm.expect(getUserResponse[field], `${field} should match`).to.eql(userDetails[field]);\r",
+              "    });\r",
+              "}\r",
+              "\r",
+              "pm.test('Created user ID matches requested user ID', function () {\r",
+              "    const requestedUserId = Number(pm.collectionVariables.get('userId'));\r",
+              "\r",
+              "    pm.expect(getUserResponse.id).to.be.a('number');\r",
+              "    pm.expect(getUserResponse.id).to.be.above(0);\r",
+              "    pm.expect(getUserResponse.id).to.eql(requestedUserId);\r",
+              "});\r",
+              "\r",
+              "pm.test('Created user details match request body', function () {\r",
+              "    expectFieldsToMatchResponse([\r",
+              "        'username',\r",
+              "        'firstname',\r",
+              "        'lastname',\r",
+              "        'email',\r",
+              "        'officeId',\r",
+              "        'passwordNeverExpires'\r",
+              "    ]);\r",
+              "});\r",
+              "\r",
+              "pm.test('Created user selected roles match request body', function () {\r",
+              "    pm.expect(getUserResponse.selectedRoles).to.be.an('array');\r",
+              "    const selectedRoleIds = getUserResponse.selectedRoles.map((role) => role.id);\r",
+              "\r",
+              "    userDetails.roles.forEach((roleId) => {\r",
+              "        pm.expect(selectedRoleIds).to.include(roleId);\r",
+              "    });\r",
+              "});\r",
+              "\r",
+              "if (getUserResponse && getUserResponse.id) {\r",
+              "    pm.collectionVariables.set('userId', String(getUserResponse.id));\r",
+              "}\r"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "basic {{accessToken}}",
+            "type": "text"
+          },
+          {
+            "key": "{{tenantKey}}",
+            "value": "{{tenantId}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/v1/users/:userId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "v1",
+            "users",
+            ":userId"
+          ],
+          "variable": [
+            {
+              "key": "userId",
+              "value": "{{userId}}"
             }
           ]
         }
@@ -682,6 +992,22 @@
     {
       "key": "mobileNo",
       "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "userDetails",
+      "value": ""
+    },
+    {
+      "key": "roleIdNameMap",
+      "value": ""
+    },
+    {
+      "key": "newUserPassword",
+      "value": "MifosTest7@Q"
     }
   ]
 }
