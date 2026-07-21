@@ -31,7 +31,7 @@ export function buildUser(key: UserFixtureKey = 'default-user', overrides: Parti
 }
 
 function applyUniqueToken(user: CreateUserRequest): CreateUserRequest {
-    const unique = `${Date.now()}${randomUUID().replaceAll('-', '').slice(0, 12)}`;
+    const unique = `${Date.now()}${randomUUID().replaceAll('-', '').slice(0, 3)}`;
 
     return {
         ...user,

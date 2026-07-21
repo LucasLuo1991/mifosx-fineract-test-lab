@@ -1,7 +1,7 @@
 import { type Locator, type Page, expect } from '@playwright/test';
+import { tenantId } from '../support/env.js';
 import { routes } from '../support/routes.js';
 import { BasePage } from './base.page.js';
-
 
 export class HomePage extends BasePage {
     private readonly closeWarningButton: Locator;
@@ -17,6 +17,14 @@ export class HomePage extends BasePage {
         this.signOutButton = this.page.getByRole('button', { description: 'Sign Out', exact: true });
     }
 
+    private loginSuccessToast(username: string): Locator {
+        return this.page.getByText(`${username} successfully logged in!`);
+    }
+
+    private welcomeMessage(username: string): Locator {
+        return this.page.getByText(`Welcome ${username} to ${tenantId}`);
+    }
+
     async expectAuthWarning() {
         await expect(this.authWarning).toBeVisible();
     }
@@ -30,5 +38,16 @@ export class HomePage extends BasePage {
     async signOut() {
         await this.sidebarToggleButton.click();
         await this.signOutButton.click();
+    }
+
+    async expectLoginSuccessToast(username: string) {
+        const loginSuccessToast = this.loginSuccessToast(username);
+
+        await expect(loginSuccessToast).toBeVisible();
+        await expect(loginSuccessToast).not.toBeVisible();
+    }
+
+    async expectWelcomeMessage(username: string) {
+        await expect(this.welcomeMessage(username)).toBeVisible();
     }
 }
